@@ -1,6 +1,6 @@
 /* Reset and base styles *//* Prevent full-page horizontal scroll when interacting with the table */
 .table-section {
-    overflow-x: hidden;
+    overflow-x: visible;
 }
 * {
     margin: 0;
@@ -1991,6 +1991,7 @@ section h2 {
 .table-section .league-table th:first-child,
 .table-section .league-table td:first-child {
     position: sticky;
+    position: -webkit-sticky;
     left: 0;
     background: var(--card-bg);
     z-index: 100;
@@ -2011,6 +2012,7 @@ section h2 {
 /* Team column */
 .table-section .league-table th:nth-child(2) {
     position: sticky;
+    position: -webkit-sticky;
     left: 60px; /* flush to Pos column width */
     background: var(--card-bg); /* header remains opaque */
     z-index: 120;
@@ -2021,6 +2023,7 @@ section h2 {
 }
 .table-section .league-table td:nth-child(2) {
     position: sticky;
+    position: -webkit-sticky;
     left: 60px; /* flush to Pos column width */
     background: var(--card-bg); /* opaque to mask underlying content */
     z-index: 100; /* match Pos body cell z-index */
@@ -2042,6 +2045,7 @@ section h2 {
 /* Sticky header cells align with sticky body cells */
 .table-section .league-table thead th:first-child {
     position: sticky;
+    position: -webkit-sticky;
     left: 0;
     z-index: 120; /* header z-index */
     background: var(--card-bg);
@@ -2049,6 +2053,7 @@ section h2 {
 }
 .table-section .league-table thead th:nth-child(2) {
     position: sticky;
+    position: -webkit-sticky;
     left: 60px; /* flush to Pos column width */
     z-index: 120; /* match Pos header z-index */
     background: var(--card-bg);

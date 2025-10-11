@@ -2082,34 +2082,33 @@ section h2 {
     position: relative;
 }
 .table-section .league-table thead th {
-    position: sticky;
-    top: 0;
+    position: static;
+    top: auto;
     background: var(--card-bg);
     border-right: 1px solid rgba(0,0,0,0.08); /* subtle header separators */
     height: 46px; /* match body row height for seamless Pos/Team slab */
     border-bottom: none;
     box-shadow: none;
-    z-index: 300;
+    z-index: 0;
 }
 .table-section .league-table thead th:last-child {
     border-right: none;
 }
-/* Combined Pos+Team column (sticky by class and position) */
+/* Combined Pos+Team column (no stickiness so the whole table scrolls) */
 .table-section .league-table th:first-child,
 .table-section .league-table td:first-child,
 .table-section .league-table th.table-pos-team-header,
 .table-section .league-table td.table-pos-team-cell {
-    position: sticky;
-    position: -webkit-sticky;
-    left: 0;
+    position: static;
+    left: auto;
     background: var(--card-bg);
-    z-index: 200; /* above scrolling stats */
+    z-index: 0;
     min-width: var(--pos-team-col-width);
     width: var(--pos-team-col-width);
     box-shadow: none;
     overflow: hidden; /* clip underlying scrolling content */
     text-align: left;
-    transform: translateZ(0); /* trigger compositing for smoother stickiness */
+    transform: none; /* remove compositing */
 }
 
 /* Divider alignment: apply on body, remove on header */
@@ -2130,10 +2129,9 @@ section h2 {
 }
 /* Sticky header cell aligns with sticky body cell */
 .table-section .league-table thead th:first-child {
-    position: sticky;
-    position: -webkit-sticky;
-    left: 0;
-    z-index: 350;
+    position: static;
+    left: auto;
+    z-index: 0;
     background: var(--card-bg);
     min-width: var(--pos-team-col-width);
     width: var(--pos-team-col-width);

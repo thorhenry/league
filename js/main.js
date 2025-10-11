@@ -1,7 +1,7 @@
 // Team data structure
 const teamsData = {
     'maria': {
-        name: 'Aka The Kraven',
+        name: 'Aka',
         stadium: 'Holy Stadium',
         manager: 'Mariakhan',
         capacity: 45000,
@@ -12,7 +12,7 @@ const teamsData = {
         logo: 'images/club-logos/aka.svg'
     },
     'thor': {
-        name: 'Thorvisual',
+        name: 'Thor',
         stadium: 'Creative Arena',
         manager: 'Thorhenry',
         capacity: 40000,
@@ -23,7 +23,7 @@ const teamsData = {
         logo: 'images/club-logos/thorvisual.svg'
     },
     'smiles': {
-        name: 'Chutosmiles',
+        name: 'Smiles',
         stadium: 'Happy Arena',
         manager: 'Chuto Smiles',
         capacity: 38000,
@@ -34,7 +34,7 @@ const teamsData = {
         logo: 'images/club-logos/chutosmiles.svg'
     },
     'offer': {
-        name: 'Offer Art',
+        name: 'Offer',
         stadium: 'Art Ground',
         manager: 'Offer Art',
         capacity: 42000,
@@ -341,10 +341,12 @@ function getPageContent(page) {
                                 <table class="league-table" style="margin-bottom:1em;width:100%;border-radius:14px;overflow:hidden;min-width:200px;">
                                     <thead>
                                         <tr>
-                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:left;width:15%;">Pos</th>
-                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:left;width:60%;">Team</th>
-                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;width:12.5%;">P</th>
-                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;width:12.5%;">Pts</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:left;width:10%;">Pos</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:left;width:50%;">Team</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;width:10%;">P</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;width:10%;">W</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;width:10%;">GD</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;width:10%;">Pts</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -356,6 +358,8 @@ function getPageContent(page) {
                                                     <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px;">${team.name}</span>
                                                 </td>
                                                 <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.played}</td>
+                                                <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.won}</td>
+                                                <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.goalDiff}</td>
                                                 <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.points}</td>
                                             </tr>
                                         `).join('')}
@@ -367,6 +371,8 @@ function getPageContent(page) {
                                                     <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px;">${team.name}</span>
                                                 </td>
                                                 <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.played}</td>
+                                                <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.won}</td>
+                                                <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.goalDiff}</td>
                                                 <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.points}</td>
                                             </tr>
                                         `).join('')}
@@ -668,11 +674,18 @@ function getPageContent(page) {
                                     <th>GD</th>
                                     <th>Pts</th>
                                     <th>Form</th>
+                                    <th>Next</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 ${leagueTable.map((team, idx, arr) => {
                                     const moveAttr = teamMoveMap[team.teamId] || 'same';
+                                    // Determine next opponent fixture for this team
+                                    const upcoming = matchData.fixtures
+                                        .filter(f => f.status === 'scheduled' && (f.homeTeam === team.teamId || f.awayTeam === team.teamId))
+                                        .sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`));
+                                    const nextFixture = upcoming[0];
+                                    const oppId = nextFixture ? (nextFixture.homeTeam === team.teamId ? nextFixture.awayTeam : nextFixture.homeTeam) : null;
                                     return `
                                         <tr class="${idx < 4 ? 'top4-qualifier' : ''} ${idx >= arr.length - 2 ? 'relegated' : ''}">
                                             <td>${idx + 1}</td>
@@ -693,6 +706,9 @@ function getPageContent(page) {
                                                 <div class="form-badges">
                                                     ${team.form.map((r, i, arr) => `<span class="form-badge ${r.toLowerCase()}${i === arr.length - 1 ? ' latest-form' : ''}">${formSymbol[r.toLowerCase()] || ''}</span>`).join('')}
                                                 </div>
+                                            </td>
+                                            <td>
+                                                ${oppId ? `<img src="${teamsData[oppId].logo}" alt="${teamsData[oppId].name} badge" title="${teamsData[oppId].name}" class="table-next-badge">` : `<span class="no-next">-</span>`}
                                             </td>
                                         </tr>
                                     `;

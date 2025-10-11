@@ -1,4 +1,7 @@
-/* Reset and base styles */
+/* Reset and base styles *//* Prevent full-page horizontal scroll when interacting with the table */
+.table-section {
+    overflow-x: hidden;
+}
 * {
     margin: 0;
     padding: 0;
@@ -388,22 +391,26 @@ section h2 {
 }
 
 .league-table th {
-    background: var(--primary-color);
-    color: #fff;
+    background: var(--card-bg);
+    color: var(--text-color);
     font-weight: 700;
-    padding: 1rem 0.7rem;
-    border-bottom: 2px solid var(--accent-color);
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    padding: 0.75rem 0.6rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     text-align: center;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.06em;
     position: sticky;
     top: 0;
     z-index: 2;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
 }
 
 .league-table td {
     padding: 0.85rem 0.7rem;
     text-align: center;
-    border-bottom: 0.1px solid #ececec;
+    /* moved divider to tbody tr border-bottom for consistent alignment */
+    border-bottom: none;
     background: transparent;
     vertical-align: middle;
 }
@@ -430,8 +437,8 @@ section h2 {
 }
 
 .table-team-badge {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
     border-radius: 50%;
     background: #fff;
@@ -439,12 +446,27 @@ section h2 {
     border: 1.5px solid #eee;
 }
 
+.table-next-badge {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border: 1.5px solid #eee;
+}
+
+.no-next {
+  color: var(--secondary-text);
+}
+
 .table-team-name {
     font-weight: 700;
     color: var(--text-color);
-    font-size: 1.05em;
+    font-size: 1.0em;
     letter-spacing: 0.01em;
     text-align: left;
+    line-height: 1; /* normalize baseline to align vertically with badges and indicators */
     white-space: nowrap;
     min-width: 0;
     overflow: hidden;
@@ -771,7 +793,8 @@ section h2 {
     .league-table th {
         position: sticky;
         top: 0;
-        background: var(--primary-color);
+        background: var(--card-bg);
+        color: var(--text-color);
         z-index: 1;
     }
 }
@@ -1905,15 +1928,18 @@ section h2 {
     align-items: center;
     border: 0.25rem;
 }
+/* Override highlight fill on sticky first cell within table page */
 .top4-qualifier td:first-child {
-    background: rgba(76, 175, 80, 0.18) !important;
-    color: #222;
+    background: var(--card-bg) !important;
+    color: var(--text-color);
     font-weight: 700;
+    border-left: 4px solid rgba(76, 175, 80, 0.7);
 }
 .relegated td:first-child {
-    background: rgba(255, 20, 147, 0.13) !important;
-    color: #222;
+    background: var(--card-bg) !important;
+    color: var(--text-color);
     font-weight: 700;
+    border-left: 4px solid rgba(255, 20, 147, 0.7);
 }
 .cl-icon, .relegation-icon {
     display: none !important;
@@ -1923,29 +1949,124 @@ section h2 {
 }
 .top4-qualifier:hover td:first-child,
 .top4-qualifier td:first-child:hover {
-    background: rgba(80,200,120,0.22) !important;
+    background: var(--card-bg) !important;
 }
 .relegated:hover td:first-child,
 .relegated td:first-child:hover {
-    background: rgba(255,165,0,0.22) !important;
+    background: var(--card-bg) !important;
 }
 .league-table tbody tr:hover td:not(:first-child) {
     background: rgba(0,0,0,0.04);
     transition: background 0.2s;
+}
+
+/* Sticky first two columns on the full table page */
+.table-section .table-container {
+    overflow-x: auto;
+    position: relative;
+    isolation: isolate; /* create a new stacking context for reliable z-index layering */
+}
+.table-section .league-table {
+    min-width: 900px;
+    table-layout: fixed;
+    overflow: visible;
+    position: relative; /* ensure z-index on sticky cells works as expected */
+}
+/* tighter padding for scrollable columns */
+.table-section .league-table th,
+.table-section .league-table td {
+    padding: 0.6rem 0.4rem; /* slightly roomier for header clarity */
+    line-height: 1; /* tighter, consistent baseline across all cells */
+}
+.table-section .league-table thead th {
+    border-right: 1px solid rgba(0,0,0,0.08); /* subtle header separators */
+}
+.table-section .league-table thead th:last-child {
+    border-right: none;
+}
+/* establish base layering for all cells */
+.table-section .league-table td { position: relative; z-index: 1; }
+.table-section .league-table th { z-index: 10; }
+/* Pos column */
+.table-section .league-table th:first-child,
+.table-section .league-table td:first-child {
+    position: sticky;
+    left: 0;
+    background: var(--card-bg);
+    z-index: 100;
+    min-width: 60px;
+    width: 60px;
+    border-right: none; /* remove vertical divider after Pos */
+    box-shadow: none;
+}
+/* enforce uniform row height and a unified horizontal divider per row */
+.table-section .league-table tbody tr {
+    height: 46px;
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* unified horizontal divider per row */
+}
+.table-section .league-table tbody tr:last-child {
+    border-bottom: none; /* avoid double border at table bottom */
+}
+/* Team column */
+.table-section .league-table th:nth-child(2) {
+    position: sticky;
+    left: 60px; /* flush to Pos column width */
+    background: var(--card-bg); /* header remains opaque */
+    z-index: 120;
+    min-width: 160px;
+    width: 160px;
+    border-right: 1px solid var(--table-divider, rgba(0,0,0,0.12)); /* vertical divider AFTER Team */
+    text-align: left;
+}
+.table-section .league-table td:nth-child(2) {
+    position: sticky;
+    left: 60px; /* flush to Pos column width */
+    background: var(--card-bg); /* opaque to mask underlying content */
+    z-index: 100; /* match Pos body cell z-index */
+    min-width: 160px;
+    width: 160px;
+    border-right: 1px solid var(--table-divider, rgba(0,0,0,0.12)); /* vertical divider AFTER Team */
+    text-align: left;
+}
+.table-section .league-table th:nth-child(2)::after,
+.table-section .league-table td:nth-child(2)::after {
+    content: none;
+    width: 0;
+    background: transparent;
+}
+/* ensure hover applies behind the sticky Team body cell */
+.table-section .league-table tbody tr:hover td:nth-child(2) {
+    background: rgba(0,0,0,0.04);
+}
+/* Sticky header cells align with sticky body cells */
+.table-section .league-table thead th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 120; /* header z-index */
+    background: var(--card-bg);
+    text-align: center;
+}
+.table-section .league-table thead th:nth-child(2) {
+    position: sticky;
+    left: 60px; /* flush to Pos column width */
+    z-index: 120; /* match Pos header z-index */
+    background: var(--card-bg);
+    text-align: left;
 }
 .move-up {
     color: #4caf50;
     font-size: 1.1em;
     margin-right: 0.35em;
     position: relative;
-    top: -2px;
+    top: 0; /* centered vertically */
 }
 .move-down {
     color: var(--accent-color);
     font-size: 1.1em;
     margin-right: 0.35em;
     position: relative;
-    top: 2px;
+    top: 0; /* centered vertically */
 }
 .move-dot {
     color: #bbb;
@@ -1970,14 +2091,14 @@ section h2 {
     color: #4caf50;
     font-size: 1em;
     position: relative;
-    top: -1px;
+    top: 0; /* centered vertically */
 }
 .move-indicator[data-move="down"]::before {
     content: "\25BC";
     color: var(--accent-color);
     font-size: 1em;
     position: relative;
-    top: 1px;
+    top: 0; /* centered vertically */
 }
 .move-indicator[data-move="same"]::before {
     content: "\25CF";
@@ -2136,22 +2257,24 @@ section h2 {
 
 /* Table highlight helpers */
 .top4-qualifier td:first-child {
-    background: rgba(76, 175, 80, 0.18) !important;
-    color: #222;
+    background: var(--card-bg) !important;
+    color: var(--text-color);
     font-weight: 700;
+    border-left: 4px solid rgba(76, 175, 80, 0.7);
 }
 .top4-qualifier:hover td:first-child,
 .top4-qualifier td:first-child:hover {
-    background: rgba(80, 200, 120, 0.22) !important;
+    background: var(--card-bg) !important;
 }
 .relegated td:first-child {
-    background: rgba(255, 20, 147, 0.13) !important;
-    color: #222;
+    background: var(--card-bg) !important;
+    color: var(--text-color);
     font-weight: 700;
+    border-left: 4px solid rgba(255, 20, 147, 0.7);
 }
 .relegated:hover td:first-child,
 .relegated td:first-child:hover {
-    background: rgba(255,165,0,0.22) !important;
+    background: var(--card-bg) !important;
 }
 
 
@@ -2216,5 +2339,53 @@ section h2 {
         border-radius: 0;
         margin: 0;
     }
+}
+
+/* Compact widths for stat columns on table page */
+.table-section .league-table th:nth-child(3),
+.table-section .league-table td:nth-child(3) {
+  min-width: 52px;
+  width: 52px;
+}
+.table-section .league-table th:nth-child(4),
+.table-section .league-table td:nth-child(4) {
+  min-width: 52px;
+  width: 52px;
+}
+.table-section .league-table th:nth-child(5),
+.table-section .league-table td:nth-child(5) {
+  min-width: 52px;
+  width: 52px;
+}
+.table-section .league-table th:nth-child(6),
+.table-section .league-table td:nth-child(6) {
+  min-width: 52px;
+  width: 52px;
+}
+.table-section .league-table th:nth-child(7),
+.table-section .league-table td:nth-child(7) {
+  min-width: 56px;
+  width: 56px;
+}
+.table-section .league-table th:nth-child(8),
+.table-section .league-table td:nth-child(8) {
+  min-width: 56px;
+  width: 56px;
+}
+.table-section .league-table th:nth-child(9),
+.table-section .league-table td:nth-child(9) {
+  min-width: 56px;
+  width: 56px;
+}
+.table-section .league-table th:nth-child(10),
+.table-section .league-table td:nth-child(10) {
+  min-width: 60px;
+  width: 60px;
+}
+.table-section .league-table th:nth-child(12),
+.table-section .league-table td:nth-child(12) {
+  min-width: 56px;
+  width: 56px;
+  text-align: center;
 }
 

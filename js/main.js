@@ -663,8 +663,7 @@ function getPageContent(page) {
                         <table class="league-table">
                             <thead>
                                 <tr>
-                                    <th>Pos</th>
-                                    <th>Team</th>
+                                    <th class="table-pos-team-header">Pos & Team</th>
                                     <th>P</th>
                                     <th>W</th>
                                     <th>D</th>
@@ -688,8 +687,8 @@ function getPageContent(page) {
                                     const oppId = nextFixture ? (nextFixture.homeTeam === team.teamId ? nextFixture.awayTeam : nextFixture.homeTeam) : null;
                                     return `
                                         <tr class="${idx < 4 ? 'top4-qualifier' : ''} ${idx >= arr.length - 2 ? 'relegated' : ''}">
-                                            <td>${idx + 1}</td>
-                                            <td class="table-team-cell">
+                                            <td class="table-pos-team-cell">
+                                                <span class="table-pos">${idx + 1}</span>
                                                 <span class="move-indicator" data-move="${moveAttr}"></span>
                                                 <img src="${teamsData[team.teamId].logo}" alt="${team.name} logo" class="table-team-badge">
                                                 <span class="table-team-name">${team.name}</span>
@@ -703,8 +702,11 @@ function getPageContent(page) {
                                             <td>${team.goalDiff > 0 ? '+' : ''}${team.goalDiff}</td>
                                             <td>${team.points}</td>
                                             <td>
-                                                <div class="form-badges">
-                                                    ${team.form.map((r, i, arr) => `<span class="form-badge ${r.toLowerCase()}${i === arr.length - 1 ? ' latest-form' : ''}">${formSymbol[r.toLowerCase()] || ''}</span>`).join('')}
+                                                <div class="form-indicators">
+                                                    ${team.form.map((result) => {
+                                                        const symbol = formSymbol[result.toLowerCase()] || '-';
+                                                        return `<span class="form-indicator ${result.toLowerCase()}">${symbol}</span>`;
+                                                    }).join('')}
                                                 </div>
                                             </td>
                                             <td>

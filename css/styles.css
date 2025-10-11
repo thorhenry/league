@@ -474,7 +474,7 @@ section h2 {
 }
 
 /* Points column in league table uses accent color and bold font */
-.league-table td:nth-child(10) {
+.league-table td:nth-child(9) {
     color: var(--accent-color);
     font-weight: 700;
     background: none;
@@ -1469,6 +1469,101 @@ section h2 {
     color: white;
 }
 
+/* Match history styles */
+.team-stats-modal .match-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.team-stats-modal .recent-match {
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto;
+    grid-template-areas: 'md opp score badge';
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--light-bg);
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+}
+
+.team-stats-modal .recent-match:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.team-stats-modal .recent-match .matchday {
+    grid-area: md;
+    color: var(--secondary-text, #888);
+    font-weight: 600;
+    font-size: 0.9rem;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.team-stats-modal .recent-match .opponent {
+    grid-area: opp;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.team-stats-modal .match-list .team-logo-small {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.team-stats-modal .recent-match .scoreline {
+    grid-area: score;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--text-color);
+}
+.team-stats-modal .recent-match .scoreline.w { color: #4caf50; }
+.team-stats-modal .recent-match .scoreline.d { color: #ffc107; }
+.team-stats-modal .recent-match .scoreline.l { color: #f44336; }
+
+.team-stats-modal .recent-match .result-badge {
+    grid-area: badge;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+.team-stats-modal .recent-match .result-badge.w { background: #4caf50; color: #fff; }
+.team-stats-modal .recent-match .result-badge.d { background: #ffc107; color: #fff; }
+.team-stats-modal .recent-match .result-badge.l { background: #f44336; color: #fff; }
+
+.team-stats-modal .match-list .no-results {
+    text-align: center;
+    color: var(--secondary-text, #888);
+    padding: 0.6rem 0;
+}
+
+/* Responsive layout for match history */
+@media (max-width: 768px) {
+    .team-stats-modal .recent-match {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            'md badge'
+            'opp score';
+        row-gap: 0.4rem;
+    }
+    .team-stats-modal .recent-match .scoreline { justify-self: end; }
+    .team-stats-modal .recent-match .result-badge { justify-self: end; }
+}
+
 /* Mobile styles for stats modal */
 @media (max-width: 768px) {
     .team-stats-modal {
@@ -1960,45 +2055,50 @@ section h2 {
     transition: background 0.2s;
 }
 
-/* Sticky first two columns on the full table page */
+/* Sticky combined first column on the full table page */
 .table-section .table-container {
     overflow-x: auto;
     position: relative;
     isolation: isolate; /* create a new stacking context for reliable z-index layering */
+    -webkit-overflow-scrolling: touch; /* smooth mobile scrolling */
 }
 .table-section .league-table {
     min-width: 900px;
     table-layout: fixed;
     overflow: visible;
     position: relative; /* ensure z-index on sticky cells works as expected */
+    /* use variable for combined sticky column width to keep it flush */
+    --pos-team-col-width: 220px; /* 60px (Pos) + 160px (Team) */
 }
 /* tighter padding for scrollable columns */
 .table-section .league-table th,
 .table-section .league-table td {
     padding: 0.6rem 0.4rem; /* slightly roomier for header clarity */
     line-height: 1; /* tighter, consistent baseline across all cells */
+    z-index: 0; /* baseline for scrolling cells */
+    position: relative;
 }
 .table-section .league-table thead th {
     border-right: 1px solid rgba(0,0,0,0.08); /* subtle header separators */
+    height: 46px; /* match body row height for seamless Pos/Team slab */
 }
 .table-section .league-table thead th:last-child {
     border-right: none;
 }
-/* establish base layering for all cells */
-.table-section .league-table td { position: relative; z-index: 1; }
-.table-section .league-table th { z-index: 10; }
-/* Pos column */
+/* Combined Pos+Team column */
 .table-section .league-table th:first-child,
 .table-section .league-table td:first-child {
     position: sticky;
     position: -webkit-sticky;
     left: 0;
     background: var(--card-bg);
-    z-index: 100;
-    min-width: 60px;
-    width: 60px;
-    border-right: none; /* remove vertical divider after Pos */
+    z-index: 200; /* above scrolling stats */
+    min-width: var(--pos-team-col-width);
+    width: var(--pos-team-col-width);
+    border-right: 1px solid var(--table-divider, rgba(0,0,0,0.12)); /* vertical divider AFTER combined column */
     box-shadow: none;
+    overflow: hidden; /* clip underlying scrolling content */
+    text-align: left;
 }
 /* enforce uniform row height and a unified horizontal divider per row */
 .table-section .league-table tbody tr {
@@ -2009,55 +2109,39 @@ section h2 {
 .table-section .league-table tbody tr:last-child {
     border-bottom: none; /* avoid double border at table bottom */
 }
-/* Team column */
-.table-section .league-table th:nth-child(2) {
-    position: sticky;
-    position: -webkit-sticky;
-    left: 60px; /* flush to Pos column width */
-    background: var(--card-bg); /* header remains opaque */
-    z-index: 120;
-    min-width: 160px;
-    width: 160px;
-    border-right: 1px solid var(--table-divider, rgba(0,0,0,0.12)); /* vertical divider AFTER Team */
-    text-align: left;
-}
-.table-section .league-table td:nth-child(2) {
-    position: sticky;
-    position: -webkit-sticky;
-    left: 60px; /* flush to Pos column width */
-    background: var(--card-bg); /* opaque to mask underlying content */
-    z-index: 100; /* match Pos body cell z-index */
-    min-width: 160px;
-    width: 160px;
-    border-right: 1px solid var(--table-divider, rgba(0,0,0,0.12)); /* vertical divider AFTER Team */
-    text-align: left;
-}
-.table-section .league-table th:nth-child(2)::after,
-.table-section .league-table td:nth-child(2)::after {
-    content: none;
-    width: 0;
-    background: transparent;
-}
-/* ensure hover applies behind the sticky Team body cell */
-.table-section .league-table tbody tr:hover td:nth-child(2) {
-    background: rgba(0,0,0,0.04);
-}
-/* Sticky header cells align with sticky body cells */
+/* Sticky header cell aligns with sticky body cell */
 .table-section .league-table thead th:first-child {
     position: sticky;
     position: -webkit-sticky;
     left: 0;
-    z-index: 120; /* header z-index */
+    z-index: 200;
     background: var(--card-bg);
-    text-align: center;
-}
-.table-section .league-table thead th:nth-child(2) {
-    position: sticky;
-    position: -webkit-sticky;
-    left: 60px; /* flush to Pos column width */
-    z-index: 120; /* match Pos header z-index */
-    background: var(--card-bg);
+    min-width: var(--pos-team-col-width);
+    width: var(--pos-team-col-width);
     text-align: left;
+    border-right: none;
+}
+.table-pos-team-cell .table-team-badge {
+    display: block;
+    width: 28px;
+    height: 28px;
+}
+.table-pos-team-cell .table-team-name {
+    display: inline-flex;
+    align-items: center;
+}
+/* Layout for merged Pos+Team cell content */
+.table-pos-team-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    height: 100%;
+}
+.table-pos-team-cell .table-pos {
+    font-weight: 700;
+    width: 60px;
+    text-align: center;
+    flex: 0 0 auto;
 }
 .move-up {
     color: #4caf50;
@@ -2347,6 +2431,11 @@ section h2 {
 }
 
 /* Compact widths for stat columns on table page */
+.table-section .league-table th:nth-child(2),
+.table-section .league-table td:nth-child(2) {
+  min-width: 52px;
+  width: 52px;
+}
 .table-section .league-table th:nth-child(3),
 .table-section .league-table td:nth-child(3) {
   min-width: 52px;
@@ -2379,18 +2468,23 @@ section h2 {
 }
 .table-section .league-table th:nth-child(9),
 .table-section .league-table td:nth-child(9) {
-  min-width: 56px;
-  width: 56px;
-}
-.table-section .league-table th:nth-child(10),
-.table-section .league-table td:nth-child(10) {
   min-width: 60px;
   width: 60px;
 }
-.table-section .league-table th:nth-child(12),
-.table-section .league-table td:nth-child(12) {
+.table-section .league-table th:nth-child(10),
+.table-section .league-table td:nth-child(10) {
+  min-width: 160px;
+  width: 160px;
+}
+.table-section .league-table th:nth-child(11),
+.table-section .league-table td:nth-child(11) {
   min-width: 56px;
   width: 56px;
   text-align: center;
 }
+.table-section .league-table td:nth-child(10) .form-indicators,
+.table-section .league-table th:nth-child(10) .form-indicators {
+  justify-content: center;
+}
+/* duplicate form-indicator styles removed; original styles defined earlier for Teams page */
 

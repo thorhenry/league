@@ -1981,8 +1981,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // Automatically detect new deployments and refresh the page for users
 function initializeAutoUpdateWatcher() {
     // Watch core assets for changes. If any change is detected, reload the page.
-    const RESOURCE_URLS = ['index.html', 'js/main.js', 'styles.css'];
+    const RESOURCE_URLS = ['index.html', 'js/main.js', 'css/styles.css'];
     const fingerprints = new Map();
+
+    // Detect if main.js is loaded with a version parameter (cache-bust)
+    const hasVersionParam = (() => {
+        const scripts = Array.from(document.getElementsByTagName('script'));
+        const mainScript = scripts.find(s => (s.src || '').includes('js/main.js'));
+        return mainScript ? /[?&]v=/.test(mainScript.src) : false;
+    })();
 
     function simpleHash(str) {
         let h = 5381;
@@ -2023,8 +2030,31 @@ function initializeAutoUpdateWatcher() {
         }
 
         if (changed) {
-            console.log('New version detected. Refreshing to load latest content...');
-            window.location.reload();
+            console.log('New version detected.');
+
+            if (hasVersionParam) {
+                // With versioned JS, allow natural cache-busting on next navigation without forcing reload.
+                window.__updateAvailable = true;
+                console.log('Versioned JS detected; update will apply on next navigation.');
+                return;
+            }
+
+            // Only auto-reload when the tab is inactive to avoid disrupting the user.
+            if (document.hidden) {
+                console.log('Tab not active. Refreshing to load latest content...');
+                window.location.reload();
+            } else {
+                // Defer reload until the tab becomes inactive or on next navigation.
+                window.__updateAvailable = true;
+                console.log('Update available; will refresh when tab becomes inactive or on next visit.');
+                const onVisibilityChange = () => {
+                    if (document.hidden && window.__updateAvailable) {
+                        window.removeEventListener('visibilitychange', onVisibilityChange);
+                        window.location.reload();
+                    }
+                };
+                window.addEventListener('visibilitychange', onVisibilityChange, { once: true });
+            }
         }
     }
 

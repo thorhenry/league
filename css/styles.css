@@ -2058,8 +2058,11 @@ section h2 {
 /* Sticky combined first column on the full table page */
 .table-section .table-container {
     overflow-x: auto;
+    overflow-y: auto; /* detach vertical scroll into the container */
     position: relative;
     isolation: isolate; /* create a new stacking context for reliable z-index layering */
+    overscroll-behavior: contain; /* prevent scroll chaining to the page */
+    max-height: 60vh; /* allow the table to scroll on its own vertically */
     -webkit-overflow-scrolling: touch; /* smooth mobile scrolling */
 }
 .table-section .league-table {
@@ -2079,15 +2082,23 @@ section h2 {
     position: relative;
 }
 .table-section .league-table thead th {
+    position: sticky;
+    top: 0;
+    background: var(--card-bg);
     border-right: 1px solid rgba(0,0,0,0.08); /* subtle header separators */
     height: 46px; /* match body row height for seamless Pos/Team slab */
+    border-bottom: none;
+    box-shadow: none;
+    z-index: 300;
 }
 .table-section .league-table thead th:last-child {
     border-right: none;
 }
-/* Combined Pos+Team column */
+/* Combined Pos+Team column (sticky by class and position) */
 .table-section .league-table th:first-child,
-.table-section .league-table td:first-child {
+.table-section .league-table td:first-child,
+.table-section .league-table th.table-pos-team-header,
+.table-section .league-table td.table-pos-team-cell {
     position: sticky;
     position: -webkit-sticky;
     left: 0;
@@ -2095,10 +2106,18 @@ section h2 {
     z-index: 200; /* above scrolling stats */
     min-width: var(--pos-team-col-width);
     width: var(--pos-team-col-width);
-    border-right: 1px solid var(--table-divider, rgba(0,0,0,0.12)); /* vertical divider AFTER combined column */
     box-shadow: none;
     overflow: hidden; /* clip underlying scrolling content */
     text-align: left;
+    transform: translateZ(0); /* trigger compositing for smoother stickiness */
+}
+
+/* Divider alignment: apply on body, remove on header */
+.table-section .league-table td.table-pos-team-cell {
+    border-right: 1px solid var(--table-divider, rgba(0,0,0,0.12));
+}
+.table-section .league-table th.table-pos-team-header {
+    border-right: 1px solid var(--table-divider, rgba(0,0,0,0.12));
 }
 /* enforce uniform row height and a unified horizontal divider per row */
 .table-section .league-table tbody tr {
@@ -2114,7 +2133,7 @@ section h2 {
     position: sticky;
     position: -webkit-sticky;
     left: 0;
-    z-index: 200;
+    z-index: 350;
     background: var(--card-bg);
     min-width: var(--pos-team-col-width);
     width: var(--pos-team-col-width);

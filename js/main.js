@@ -365,7 +365,7 @@ function getPageContent(page) {
                                     </thead>
                                     <tbody>
                                         ${top4.map((team, idx) => `
-                                            <tr class="cl-qualifier">
+                                            <tr class="top4-qualifier">
                                                 <td style="color:var(--text-color);padding:0.8em 0.5em;">${idx + 1}</td>
                                                 <td style="display:flex;align-items:center;gap:0.5em;color:var(--text-color);padding:0.8em 0.5em;">
                                                     <img src="${teamsData[team.teamId].logo}" alt="${team.name} logo" style="width:20px;height:20px;border-radius:50%;background:#fff;">
@@ -590,13 +590,18 @@ function getPageContent(page) {
             const sortedNews = news.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
             return `
                 <section class="news-section">
-                    <h2>News</h2>
+                    <div class="news-header">
+                        <h2 class="section-title">Latest News</h2>
+                        <p class="news-subtitle">Club announcements, transfers and stories</p>
+                    </div>
                     <div class="news-grid">
                         ${sortedNews.length === 0 ? `<div class='muted-note'>No news available</div>` : sortedNews.map(n => `
                             <article class="news-card">
-                                <h3 class="news-title">${n.title}</h3>
+                                <div class="news-card-header">
+                                    <h3 class="news-title"><span class="news-title-scroll">${n.title}</span></h3>
+                                    <span class="news-meta"><i class="fas fa-calendar-alt"></i> ${n.date}</span>
+                                </div>
                                 <p class="news-content">${n.content}</p>
-                                <div class="news-meta">${n.date}</div>
                             </article>
                         `).join('')}
                     </div>
@@ -673,7 +678,7 @@ function getPageContent(page) {
                                 ${leagueTable.map((team, idx, arr) => {
                                     const moveAttr = teamMoveMap[team.teamId] || 'same';
                                     return `
-                                        <tr class="${idx < 4 ? 'cl-qualifier' : ''} ${idx >= arr.length - 2 ? 'relegated' : ''}">
+                                        <tr class="${idx < 4 ? 'top4-qualifier' : ''} ${idx >= arr.length - 2 ? 'relegated' : ''}">
                                             <td>${idx + 1}</td>
                                             <td class="table-team-cell">
                                                 <span class="move-indicator" data-move="${moveAttr}"></span>
@@ -700,7 +705,7 @@ function getPageContent(page) {
                         </table>
                     </div>
                     <div class="table-legend-simple">
-                        Champions League qualification <span class="legend-color cl"></span> &nbsp;&nbsp;
+                        Top 4 zone <span class="legend-color top4"></span> &nbsp;&nbsp;
                         Relegation zone <span class="legend-color rel"></span>
                     </div>
                 </section>
@@ -772,14 +777,11 @@ function getPageContent(page) {
                                         <i class="fas fa-star"></i> Competitions
                                     </h3>
                                     <div class="question-options" style="display:flex;flex-direction:column;gap:0.5rem;">
-                                        <button class="question-btn" data-value="champions" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
-                                            <i class="fas fa-trophy"></i> Tell me about the Champions League
-                                        </button>
-                                        <button class="question-btn" data-value="cups" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
-                                            <i class="fas fa-cup"></i> Show cup progression
-                                        </button>
                                         <button class="question-btn" data-value="managers" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
                                             <i class="fas fa-user-tie"></i> Show manager rankings
+                                        </button>
+                                        <button class="question-btn" data-value="preseason_friendlies" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
+                                            <i class="fas fa-handshake"></i> Show pre-season friendlies
                                         </button>
                                     </div>
                                 </div>
@@ -789,6 +791,9 @@ function getPageContent(page) {
                                         <i class="fas fa-users"></i> Teams
                                     </h3>
                                     <div class="question-options" style="display:flex;flex-direction:column;gap:0.5rem;">
+                                        <button class="question-btn" data-value="team_overview" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
+                                            <i class="fas fa-info-circle"></i> Team overview
+                                        </button>
                                         ${Object.entries(teamsData).map(([id, team]) => `
                                             <button class="question-btn" data-value="team_${id}" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
                                                 <i class="fas fa-shield-alt"></i> How is ${team.name} performing?
@@ -810,8 +815,6 @@ function getPageContent(page) {
                                 • League standings and statistics
                                 • Match results and predictions
                                 • Upcoming fixtures
-                                • Champions League updates
-                                • Cup competitions progress
                                 • Team performance analysis
                             </div>
                         </div>
@@ -1279,6 +1282,18 @@ function loadPage(pageId) {
     if (pageId === 'friendlies') {
         initializeFriendliesFilters();
     }
+    if (pageId === 'news') {
+        injectNewsMarqueeStyles();
+        setTimeout(initializeNewsMarquee, 0);
+        const onResize = () => {
+            if (location.hash.replace('#','') === 'news') {
+                initializeNewsMarquee();
+            } else {
+                window.removeEventListener('resize', onResize);
+            }
+        };
+        window.addEventListener('resize', onResize);
+    }
 }
 
 // Function to update active states in navigation
@@ -1607,201 +1622,7 @@ function searchContent(query, filter) {
                 });
             }
         });
-        // YTY Cup
-        ytyCupFixtures.forEach(match => {
-            const home = teamsData[match.homeTeam]?.name || (match.homeTeam === 'tbd' ? 'TBD' : match.homeTeam);
-            const away = teamsData[match.awayTeam]?.name || (match.awayTeam === 'tbd' ? 'TBD' : match.awayTeam);
-            if (
-                home.toLowerCase().includes(searchQuery) ||
-                away.toLowerCase().includes(searchQuery)
-            ) {
-                let resultColor = '';
-                if (match.status === 'completed' && match.score) {
-                    // If the searched team is the home team
-                    if (home.toLowerCase().includes(searchQuery)) {
-                        if (match.score.home > match.score.away) {
-                            resultColor = '#4caf50'; // Win - Green
-                        } else if (match.score.home < match.score.away) {
-                            resultColor = '#f44336'; // Loss - Red
-                        } else {
-                            resultColor = '#ffc107'; // Draw - Yellow
-                        }
-                    }
-                    // If the searched team is the away team
-                    else if (away.toLowerCase().includes(searchQuery)) {
-                        if (match.score.away > match.score.home) {
-                            resultColor = '#4caf50'; // Win - Green
-                        } else if (match.score.away < match.score.home) {
-                            resultColor = '#f44336'; // Loss - Red
-                        } else {
-                            resultColor = '#ffc107'; // Draw - Yellow
-                        }
-                    }
-                }
-
-                results.push({
-                    type: 'match',
-                    competition: 'YTY Cup',
-                    data: {
-                        homeTeam: home,
-                        awayTeam: away,
-                        date: match.date + ' ' + (match.time || ''),
-                        venue: match.homeTeam !== 'tbd' && teamsData[match.homeTeam] ? teamsData[match.homeTeam].stadium : 'TBD',
-                        score: match.status === 'completed' && match.score ? `${match.score.home} - ${match.score.away}` : undefined,
-                        homeScore: match.status === 'completed' ? match.score.home : undefined,
-                        awayScore: match.status === 'completed' ? match.score.away : undefined,
-                        status: match.status,
-                        resultColor: resultColor
-                    }
-                });
-            }
-        });
-        // Super Cup
-        const sc = superCupFixture;
-        const home = teamsData[sc.homeTeam]?.name || (sc.homeTeam === 'tbd' ? 'TBD' : sc.homeTeam);
-        const away = teamsData[sc.awayTeam]?.name || (sc.awayTeam === 'tbd' ? 'TBD' : sc.awayTeam);
-        if (
-            home.toLowerCase().includes(searchQuery) ||
-            away.toLowerCase().includes(searchQuery)
-        ) {
-            let resultColor = '';
-            if (sc.status === 'completed' && sc.score) {
-                // If the searched team is the home team
-                if (home.toLowerCase().includes(searchQuery)) {
-                    if (sc.score.home > sc.score.away) {
-                        resultColor = '#4caf50'; // Win - Green
-                    } else if (sc.score.home < sc.score.away) {
-                        resultColor = '#f44336'; // Loss - Red
-                    } else {
-                        resultColor = '#ffc107'; // Draw - Yellow
-                    }
-                }
-                // If the searched team is the away team
-                else if (away.toLowerCase().includes(searchQuery)) {
-                    if (sc.score.away > sc.score.home) {
-                        resultColor = '#4caf50'; // Win - Green
-                    } else if (sc.score.away < sc.score.home) {
-                        resultColor = '#f44336'; // Loss - Red
-                    } else {
-                        resultColor = '#ffc107'; // Draw - Yellow
-                    }
-                }
-            }
-
-            results.push({
-                type: 'match',
-                competition: 'Super Cup',
-                data: {
-                    homeTeam: home,
-                    awayTeam: away,
-                    date: sc.date + ' ' + (sc.time || ''),
-                    venue: sc.homeTeam !== 'tbd' && teamsData[sc.homeTeam] ? teamsData[sc.homeTeam].stadium : 'TBD',
-                    score: sc.status === 'completed' && sc.score ? `${sc.score.home} - ${sc.score.away}` : undefined,
-                    homeScore: sc.status === 'completed' ? sc.score.home : undefined,
-                    awayScore: sc.status === 'completed' ? sc.score.away : undefined,
-                    status: sc.status,
-                    resultColor: resultColor
-                }
-            });
-        }
-        // Champions League
-        const clFixtures = getChampionsLeagueFixtures();
-        clFixtures.forEach(match => {
-            const home = teamsData[match.homeTeam]?.name || (match.homeTeam === 'tbd' ? 'TBD' : match.homeTeam);
-            const away = teamsData[match.awayTeam]?.name || (match.awayTeam === 'tbd' ? 'TBD' : match.awayTeam);
-            if (
-                home.toLowerCase().includes(searchQuery) ||
-                away.toLowerCase().includes(searchQuery)
-            ) {
-                let resultColor = '';
-                if (match.status === 'completed' && match.score) {
-                    // If the searched team is the home team
-                    if (home.toLowerCase().includes(searchQuery)) {
-                        if (match.score.home > match.score.away) {
-                            resultColor = '#4caf50'; // Win - Green
-                        } else if (match.score.home < match.score.away) {
-                            resultColor = '#f44336'; // Loss - Red
-                        } else {
-                            resultColor = '#ffc107'; // Draw - Yellow
-                        }
-                    }
-                    // If the searched team is the away team
-                    else if (away.toLowerCase().includes(searchQuery)) {
-                        if (match.score.away > match.score.home) {
-                            resultColor = '#4caf50'; // Win - Green
-                        } else if (match.score.away < match.score.home) {
-                            resultColor = '#f44336'; // Loss - Red
-                        } else {
-                            resultColor = '#ffc107'; // Draw - Yellow
-                        }
-                    }
-                }
-
-                results.push({
-                    type: 'match',
-                    competition: 'Champions League',
-                    data: {
-                        homeTeam: home,
-                        awayTeam: away,
-                        date: match.date + ' ' + (match.time || ''),
-                        venue: match.homeTeam !== 'tbd' && teamsData[match.homeTeam] ? teamsData[match.homeTeam].stadium : 'TBD',
-                        score: match.status === 'completed' && match.score ? `${match.score.home} - ${match.score.away}` : undefined,
-                        homeScore: match.status === 'completed' ? match.score.home : undefined,
-                        awayScore: match.status === 'completed' ? match.score.away : undefined,
-                        status: match.status,
-                        resultColor: resultColor
-                    }
-                });
-            }
-        });
-        // Add Champions League Final
-        const clFinal = championsLeagueFinal;
-        const clFinalHome = teamsData[clFinal.homeTeam]?.name || (clFinal.homeTeam === 'tbd' ? 'TBD' : clFinal.homeTeam);
-        const clFinalAway = teamsData[clFinal.awayTeam]?.name || (clFinal.awayTeam === 'tbd' ? 'TBD' : clFinal.awayTeam);
-        if (
-            clFinalHome.toLowerCase().includes(searchQuery) ||
-            clFinalAway.toLowerCase().includes(searchQuery)
-        ) {
-            let resultColor = '';
-            if (clFinal.status === 'completed' && clFinal.score) {
-                // If the searched team is the home team
-                if (clFinalHome.toLowerCase().includes(searchQuery)) {
-                    if (clFinal.score.home > clFinal.score.away) {
-                        resultColor = '#4caf50'; // Win - Green
-                    } else if (clFinal.score.home < clFinal.score.away) {
-                        resultColor = '#f44336'; // Loss - Red
-                    } else {
-                        resultColor = '#ffc107'; // Draw - Yellow
-                    }
-                }
-                // If the searched team is the away team
-                else if (clFinalAway.toLowerCase().includes(searchQuery)) {
-                    if (clFinal.score.away > clFinal.score.home) {
-                        resultColor = '#4caf50'; // Win - Green
-                    } else if (clFinal.score.away < clFinal.score.home) {
-                        resultColor = '#f44336'; // Loss - Red
-                    } else {
-                        resultColor = '#ffc107'; // Draw - Yellow
-                    }
-                }
-            }
-
-            results.push({
-                type: 'match',
-                competition: 'Champions League Final',
-                data: {
-                    homeTeam: clFinalHome,
-                    awayTeam: clFinalAway,
-                    date: clFinal.date + ' ' + (clFinal.time || ''),
-                    venue: clFinal.homeTeam !== 'tbd' && teamsData[clFinal.homeTeam] ? teamsData[clFinal.homeTeam].stadium : 'TBD',
-                    score: clFinal.status === 'completed' && clFinal.score ? `${clFinal.score.home} - ${clFinal.score.away}` : undefined,
-                    homeScore: clFinal.status === 'completed' ? clFinal.score.home : undefined,
-                    awayScore: clFinal.status === 'completed' ? clFinal.score.away : undefined,
-                    status: clFinal.status,
-                    resultColor: resultColor
-                }
-            });
-        }
+        // Cups and Champions League removed from search results per requirement
 
         // Sort matches by date
         results.sort((a, b) => {
@@ -1861,12 +1682,7 @@ function createResultCard(result) {
                             <strong>Goals:</strong> ${teamStats.goalsFor || 0}-${teamStats.goalsAgainst || 0}
                         </p>
                         <p style="margin:0 0 0.8em 0;color:var(--text-color);font-size:0.95em;">
-                            <strong>Champions League:</strong> ${overview.championsLeague.inCompetition ? 
-                                `${overview.championsLeague.progression || 'Group Stage'} (Position: ${overview.championsLeague.groupPosition || '-'})` : 
-                                'Not in competition'} • 
-                            <strong>YTY Cup:</strong> ${overview.ytyCup.inCompetition ? 
-                                overview.ytyCup.progression || 'In Progress' : 
-                                'Not in competition'}
+                            <strong>Recent Form:</strong> ${(teamStats.form && teamStats.form.length) ? teamStats.form.map(r => r[0].toUpperCase()).join(' ') : 'No league matches played yet'}
                         </p>
                         <button class="view-info-btn" data-team="${result.id}" style="background:var(--primary-color);color:white;border:none;padding:0.6em 1.2em;border-radius:6px;font-size:0.95em;font-weight:500;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.5em;">
                             <i class="fas fa-info-circle"></i>
@@ -1879,11 +1695,7 @@ function createResultCard(result) {
 
         case 'match':
             const competitionColors = {
-                'League': 'var(--primary-color)',
-                'Champions League': '#1a237e',
-                'Champions League Final': '#1a237e',
-                'YTY Cup': '#ff1493',
-                'Super Cup': '#ffd700'
+                'League': 'var(--primary-color)'
             };
             const competitionColor = competitionColors[result.competition] || 'var(--primary-color)';
             
@@ -2570,34 +2382,10 @@ function initializeMatchdaySelectors() {
 
 //allfixtures
 
-// --- YTY Cup Fixtures ---
-const ytyCupFixtures = [
-    // Quarter Finals
-    { id: 'yqf1', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'yotah', awayTeam: 'thor', status: 'completed', score: { home: 6, away: 2 }, penalties: { home: 0, away: 0 } },
-    { id: 'yqf2', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'completed', score: { home: 5, away: 1 }, penalties: null },
-    { id: 'yqf3', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'volts', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'yqf4', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'maria', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 5 }, penalties: { home: 0, away: 0 } },
-    // Semi Finals (Home & Away) - use 'tbd' for placeholders
-    { id: 'ysf1a', round: 'Semi Final - 1st Leg', date: '2025-07-20', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf1b', round: 'Semi Final - 2nd Leg', date: '2025-07-20', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf2a', round: 'Semi Final - 1st Leg', date: '2025-07-20', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf2b', round: 'Semi Final - 2nd Leg', date: '2025-07-20', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    // Final
-    { id: 'yfinal', round: 'Final', date: '2025-07-24', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } }
-];
 
-// --- Super Cup Fixture ---
-const superCupFixture = {
-    id: 'supercup',
-    round: 'Super Cup',
-    date: '2025-07-30',
-    time: '22:00',
-    homeTeam: 'tbd', // League winner
-    awayTeam: 'tbd', // YTY Cup winner
-    status: 'scheduled',
-    score: { home: 0, away: 0 },
-    penalties: { home: 0, away: 0 }
-};
+
+
+
 
 // --- Friendly Fixtures ---
 const friendlyFixtures = [
@@ -2614,42 +2402,9 @@ const friendlyFixtures = [
     { id: 'ff8', round: 'Mid-season', date: '2025-05-23', time: '19:00', homeTeam: 'maria', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 5 } }
 ];
 
-// Function to get Champions League fixtures
-function getChampionsLeagueFixtures() {
-    return [
-        // Matchday 1
-        { id: 'clf1', matchday: 1, date: '2025-07-16', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 1 } },
-        { id: 'clf2', matchday: 1, date: '2025-07-16', time: '22:00', homeTeam: 'phenom', awayTeam: 'yotah', status: 'completed', score: { home: 2, away: 0 } },
-        // Matchday 2
-        { id: 'clf3', matchday: 2, date: '2025-07-19', time: '20:00', homeTeam: 'yotah', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 3 } },
-        { id: 'clf4', matchday: 2, date: '2025-07-19', time: '22:00', homeTeam: 'thor', awayTeam: 'phenom', status: 'completed', score: { home: 0, away: 1 } },
-        // Matchday 3
-        { id: 'clf5', matchday: 3, date: '2025-07-21', time: '20:00', homeTeam: 'kenno', awayTeam: 'phenom', status: 'completed', score: { home: 4, away: 1 } },
-        { id: 'clf6', matchday: 3, date: '2025-07-21', time: '22:00', homeTeam: 'thor', awayTeam: 'yotah', status: 'completed', score: { home: 1, away: 5 } },
-        // Matchday 4
-        { id: 'clf7', matchday: 4, date: '2025-07-23', time: '20:00', homeTeam: 'yotah', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 1 } },
-        { id: 'clf8', matchday: 4, date: '2025-07-23', time: '22:00', homeTeam: 'phenom', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 5
-        { id: 'clf9', matchday: 5, date: '2025-07-25', time: '20:00', homeTeam: 'phenom', awayTeam: 'thor', status: 'completed', score: { home: 3, away: 1 } },
-        { id: 'clf10', matchday: 5, date: '2025-07-25', time: '22:00', homeTeam: 'kenno', awayTeam: 'yotah', status: 'completed', score: { home: 3, away: 2 } },
-        // Matchday 6
-        { id: 'clf11', matchday: 6, date: '2025-07-27', time: '20:00', homeTeam: 'yotah', awayTeam: 'phenom', status: 'completed', score: { home: 1, away: 0 } },
-        { id: 'clf12', matchday: 6, date: '2025-07-27', time: '22:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } }
-    ];
-}
 
-// --- Champions League Final ---
-const championsLeagueFinal = {
-    id: 'clfinal',
-    matchday: 7,
-    date: '2025-07-28',
-    time: '20:00',
-    homeTeam: 'tbd',
-    awayTeam: 'tbd',
-    status: 'scheduled',
-    score: { home: 0, away: 0 },
-    penalties: { home: 0, away: 0 }
-};
+
+
 
 // Add responsive style for table legend
 if (!document.getElementById('responsive-table-legend-style')) {
@@ -2670,10 +2425,10 @@ if (!document.getElementById('responsive-table-legend-style')) {
             padding: 1em 0.7em !important;
             font-size: 1.08em !important;
         }
-        .cl-table-scroll {
+        .table-scroll {
             overflow-x: auto !important;
         }
-        .cl-table-scroll .league-table {
+        .table-scroll .league-table {
             min-width: 600px !important;
         }
     }
@@ -2709,117 +2464,16 @@ if (!document.getElementById('responsive-table-legend-style')) {
 function getTeamOverview(teamId) {
     const team = teamsData[teamId];
     if (!team) return null;
-    // League stats and position
+
     const leagueTable = computeLeagueTable();
     const leaguePos = leagueTable.findIndex(t => t.teamId === teamId) + 1;
     const leagueStats = leagueTable.find(t => t.teamId === teamId) || {};
-    
-    // Champions League status
-    let inCL = false, clGroup = null, clGroupPos = null, clProgression = null;
-    
-    // Get Champions League fixtures
-    const championsLeagueFixtures = getChampionsLeagueFixtures();
-    // Get unique team IDs from the fixtures
-    const clTeamIds = Array.from(new Set(championsLeagueFixtures.flatMap(f => [f.homeTeam, f.awayTeam])));
-    
-    // Check if team is in CL group
-    inCL = clTeamIds.includes(teamId);
-    
-    if (inCL) {
-        // Compute CL group table
-        const clTable = (function() {
-            const table = {};
-            clTeamIds.forEach(tid => {
-                table[tid] = {
-                    teamId: tid,
-                    name: teamsData[tid]?.name || tid,
-                    played: 0,
-                    won: 0,
-                    drawn: 0,
-                    lost: 0,
-                    goalsFor: 0,
-                    goalsAgainst: 0,
-                    points: 0
-                };
-            });
-            championsLeagueFixtures.forEach(fix => {
-                if (fix.status === 'completed' && fix.score) {
-                    const home = table[fix.homeTeam];
-                    const away = table[fix.awayTeam];
-                    home.played++;
-                    away.played++;
-                    home.goalsFor += fix.score.home;
-                    home.goalsAgainst += fix.score.away;
-                    away.goalsFor += fix.score.away;
-                    away.goalsAgainst += fix.score.home;
-                    if (fix.score.home > fix.score.away) {
-                        home.won++;
-                        home.points += 3;
-                        away.lost++;
-                    } else if (fix.score.home < fix.score.away) {
-                        away.won++;
-                        away.points += 3;
-                        home.lost++;
-                    } else {
-                        home.drawn++;
-                        away.drawn++;
-                        home.points++;
-                        away.points++;
-                    }
-                }
-            });
-            return Object.values(table).sort((a, b) => {
-                if (b.points !== a.points) return b.points - a.points;
-                const gdA = a.goalsFor - a.goalsAgainst;
-                const gdB = b.goalsFor - b.goalsAgainst;
-                if (gdB !== gdA) return gdB - gdA;
-                if (b.goalsFor !== a.goalsFor) return b.goalsFor - a.goalsFor;
-                return a.name.localeCompare(b.name);
-            });
-        })();
-        clGroup = clTable;
-        clGroupPos = clTable.findIndex(t => t.teamId === teamId) + 1;
-        
-        // Check if team is in the final
-        const isInFinal = championsLeagueFinal.homeTeam === teamId || championsLeagueFinal.awayTeam === teamId;
-        if (isInFinal) {
-            clProgression = 'Final';
-        } else {
-            // Progression: top 2 go to final
-            clProgression = clGroupPos > 0 && clGroupPos <= 2 ? 'Final' : 'Group Stage';
-        }
-    }
-    
-    // YTY Cup progression
-    let inYTY = false, ytyProgression = null;
-    const ytyMatches = ytyCupFixtures.filter(f => f.homeTeam === teamId || f.awayTeam === teamId);
-    inYTY = ytyMatches.length > 0;
-    if (inYTY) {
-        // Find furthest round reached
-        const rounds = ['Quarter Final', 'Semi Final - 1st Leg', 'Semi Final - 2nd Leg', 'Final'];
-        let maxIdx = -1;
-        ytyMatches.forEach(m => {
-            const idx = rounds.indexOf(m.round);
-            if (idx > maxIdx) maxIdx = idx;
-        });
-        ytyProgression = maxIdx >= 0 ? rounds[maxIdx] : null;
-    }
-    
+
     return {
         teamDetails: team,
         league: {
             position: leaguePos,
             stats: leagueStats
-        },
-        championsLeague: {
-            inCompetition: inCL,
-            groupPosition: clGroupPos,
-            progression: clProgression,
-            groupTable: clGroup
-        },
-        ytyCup: {
-            inCompetition: inYTY,
-            progression: ytyProgression
         }
     };
 }
@@ -2912,12 +2566,12 @@ function initializeChatbot() {
                 response = processUserQuery('show recent results');
             } else if (selectedValue === 'upcoming') {
                 response = processUserQuery('show upcoming matches');
-            } else if (selectedValue === 'champions') {
-                response = processUserQuery('tell me about the champions league');
-            } else if (selectedValue === 'cups') {
-                response = processUserQuery('show cup progression');
             } else if (selectedValue === 'managers') {
                 response = processUserQuery('show manager rankings');
+            } else if (selectedValue === 'preseason_friendlies') {
+                response = processUserQuery('pre-season friendlies');
+            } else if (selectedValue === 'team_overview') {
+                response = processUserQuery('team overview');
             } else if (selectedValue.startsWith('team_')) {
                 const teamId = selectedValue.replace('team_', '');
                 const team = teamsData[teamId];
@@ -3126,6 +2780,16 @@ function loadPage(pageId) {
     if (pageId === 'friendlies') {
         initializeFriendliesFilters();
     }
+    if (pageId === 'news') {
+        injectNewsMarqueeStyles();
+        setTimeout(initializeNewsMarquee, 0);
+        if (!window.__newsMarqueeResizeBound) {
+            window.addEventListener('resize', () => {
+                initializeNewsMarquee();
+            });
+            window.__newsMarqueeResizeBound = true;
+        }
+    }
 }
 
 function processUserQuery(query) {
@@ -3142,13 +2806,13 @@ function processUserQuery(query) {
                 .filter(m => m.status === 'scheduled')
                 .sort((a, b) => new Date(a.date) - new Date(b.date))[0];
             const firstDateTime = firstFixture ? `${firstFixture.date} at ${firstFixture.time}` : 'soon';
-            return `🏁 Season Kickoff Pending\n\nNo league matches have been played yet. Standings will appear after the first matchday.\n\n📅 First fixtures: ${firstDateTime}\n\nIn the meantime, try:\n• 'Show upcoming matches'\n• 'Team overview'\n• 'Champions League schedule'\n• 'Manager rankings'`;
+            return `🏁 Season Kickoff Pending\n\nNo league matches have been played yet. Standings will appear after the first matchday.\n\n📅 First fixtures: ${firstDateTime}\n\nIn the meantime, try:\n• 'Show upcoming matches'\n• 'Team overview'\n• 'Manager rankings'`;
         }
         const top4 = leagueTable.slice(0, 4);
         const bottom2 = leagueTable.slice(-2);
         
         let response = 'Here\'s a detailed analysis of the current league standings:\n\n';
-        response += '🏆 Top 4 (Champions League Qualification):\n';
+        response += '\n🏆 Top 4:\n';
         top4.forEach((team, idx) => {
             const form = team.form.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ');
             response += `${idx + 1}. ${team.name} - ${team.points} points (${team.played} played)\n`;
@@ -3203,7 +2867,7 @@ function processUserQuery(query) {
                         .filter(m => m.status === 'scheduled' && (m.homeTeam === team.id || m.awayTeam === team.id))
                         .sort((a, b) => new Date(a.date) - new Date(b.date))[0];
                     const nextDateTime = nextFixture ? `${nextFixture.date} at ${nextFixture.time}` : 'TBD';
-                    return `⏳ ${team.name} hasn't played any official matches yet.\n\n📅 Next scheduled fixture: ${nextDateTime}.\n\nYou can ask me about:\n• 'Upcoming matches'\n• 'Squad overview'\n• 'Champions League schedule'\n• 'Friendly results'`;
+                    return `⏳ ${team.name} hasn't played any official matches yet.\n\n📅 Next scheduled fixture: ${nextDateTime}.\n\nYou can ask me about:\n• 'Upcoming matches'\n• 'Squad overview'\n• 'Friendly results'`;
                 }
                 const form = stats.form.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ');
                 
@@ -3235,12 +2899,7 @@ function processUserQuery(query) {
                 else if (losses >= 3) response += '• Struggling with recent results\n';
                 else response += '• Mixed results in recent matches\n';
                 
-                // Champions League status if applicable
-                if (overview.championsLeague.inCompetition) {
-                    response += '\n🏆 Champions League Status:\n';
-                    response += `• Current Stage: ${overview.championsLeague.progression}\n`;
-                    response += `• Group Position: ${overview.championsLeague.groupPosition}\n`;
-                }
+                // Champions League status removed
                 
                 console.log('Generated response:', response);
                 return response;
@@ -3249,139 +2908,49 @@ function processUserQuery(query) {
         return `I couldn't find information about ${teamName}. Please make sure you've spelled the team name correctly.`;
     }
 
+    // Team overview query (general)
+    if (lowerQuery.includes('team overview')) {
+        const leagueTable = computeLeagueTable();
+        const totalPlayed = leagueTable.reduce((sum, team) => sum + (team.played || 0), 0);
+        let response = '👥 Team Overview:\n\n';
+        Object.entries(teamsData).forEach(([id, team]) => {
+            const posIdx = leagueTable.findIndex(t => t.teamId === id);
+            const position = posIdx >= 0 ? posIdx + 1 : null;
+            const posText = !position || totalPlayed === 0 ? 'N/A (season not started)' : `${position}${position === 1 ? 'st' : position === 2 ? 'nd' : position === 3 ? 'rd' : 'th'}`;
+            response += `• ${team.name} (${team.shortName})\n`;
+            response += `   Manager: ${team.manager}\n`;
+            response += `   Stadium: ${team.stadium} | Capacity: ${team.capacity.toLocaleString ? team.capacity.toLocaleString() : team.capacity}\n`;
+            response += `   Founded: ${team.founded} | League Position: ${posText}\n\n`;
+        });
+        response += 'Tip: Select a specific team from the question list to get detailed performance analysis.';
+        return response;
+    }
+
+    // Pre-season friendlies queries
+    if (lowerQuery.includes('pre-season friendlies') || lowerQuery.includes('preseason friendlies')) {
+        const preSeason = (friendlyFixtures || []).filter(f => f.round === 'Pre-season');
+        if (preSeason.length === 0) {
+            return '🤝 No pre-season friendlies recorded.';
+        }
+        let response = '🤝 Pre-season Friendlies Summary:\n\n';
+        preSeason.sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(match => {
+            const homeTeam = teamsData[match.homeTeam];
+            const awayTeam = teamsData[match.awayTeam];
+            response += `📅 ${match.date} at ${match.time}\n`;
+            response += `🏟️ ${homeTeam.name} ${match.score.home} - ${match.score.away} ${awayTeam.name}\n\n`;
+        });
+        const totalGoals = preSeason.reduce((sum, m) => sum + m.score.home + m.score.away, 0);
+        const avgGoals = (totalGoals / preSeason.length).toFixed(2);
+        response += '📊 Statistics:\n';
+        response += `• Matches: ${preSeason.length}\n`;
+        response += `• Total Goals: ${totalGoals}\n`;
+        response += `• Average Goals per Game: ${avgGoals}`;
+        return response;
+    }
+
     // Champions League queries
     if (lowerQuery.includes('champions league') || lowerQuery.includes('cl')) {
-        const clFixtures = getChampionsLeagueFixtures();
-        const completedMatches = clFixtures.filter(f => f.status === 'completed');
-        const upcomingMatches = clFixtures.filter(f => f.status === 'scheduled');
-        
-        let response = '🏆 Champions League Update\n\n';
-        
-        // Group stage analysis
-        const clTeamIds = Array.from(new Set(clFixtures.flatMap(f => [f.homeTeam, f.awayTeam])));
-        const groupTable = {};
-        clTeamIds.forEach(teamId => {
-            groupTable[teamId] = {
-                teamId,
-                name: teamsData[teamId]?.name || teamId,
-                played: 0,
-                won: 0,
-                drawn: 0,
-                lost: 0,
-                goalsFor: 0,
-                goalsAgainst: 0,
-                points: 0
-            };
-        });
-        
-        completedMatches.forEach(match => {
-            const home = groupTable[match.homeTeam];
-            const away = groupTable[match.awayTeam];
-            home.played++;
-            away.played++;
-            home.goalsFor += match.score.home;
-            home.goalsAgainst += match.score.away;
-            away.goalsFor += match.score.away;
-            away.goalsAgainst += match.score.home;
-            
-            if (match.score.home > match.score.away) {
-                home.won++;
-                home.points += 3;
-                away.lost++;
-            } else if (match.score.home < match.score.away) {
-                away.won++;
-                away.points += 3;
-                home.lost++;
-            } else {
-                home.drawn++;
-                away.drawn++;
-                home.points++;
-                away.points++;
-            }
-        });
-        
-        const sortedTable = Object.values(groupTable).sort((a, b) => {
-            // First sort by points (descending)
-            if (b.points !== a.points) return b.points - a.points;
-            
-            // Then by goal difference (descending)
-            const gdA = a.goalsFor - a.goalsAgainst;
-            const gdB = b.goalsFor - b.goalsAgainst;
-            if (gdB !== gdA) return gdB - gdA;
-            
-            // Then by total goals scored (descending)
-            if (b.goalsFor !== a.goalsFor) return b.goalsFor - a.goalsFor;
-            
-            // Finally by head-to-head results or alphabetically if tied
-            if (a.headToHead && b.headToHead) {
-                if (a.headToHead[b.id] !== b.headToHead[a.id]) {
-                    return b.headToHead[a.id] - a.headToHead[b.id];
-                }
-            }
-            
-            // If everything else is equal, sort alphabetically by team name
-            return a.name.localeCompare(b.name);
-        });
-        
-        // Group Stage Table
-        response += '📊 Group Stage Standings:\n';
-        sortedTable.forEach((team, idx) => {
-            const form = team.form ? team.form.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ') : '';
-            response += `${idx + 1}. ${team.name}\n`;
-            response += `   Points: ${team.points} (${team.won}W ${team.drawn}D ${team.lost}L)\n`;
-            response += `   Goals: ${team.goalsFor}-${team.goalsAgainst}\n`;
-            if (form) response += `   Form: ${form}\n`;
-        });
-        
-        // Recent Results
-        if (completedMatches.length > 0) {
-            response += '\n⚽ Recent Results:\n';
-            const recentMatches = completedMatches
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .slice(0, 3);
-                
-            recentMatches.forEach(match => {
-                const homeTeam = teamsData[match.homeTeam];
-                const awayTeam = teamsData[match.awayTeam];
-                response += `• ${homeTeam.name} ${match.score.home}-${match.score.away} ${awayTeam.name}\n`;
-                response += `  ${match.date} at ${match.time}\n`;
-            });
-        }
-        
-        // Upcoming Matches
-        if (upcomingMatches.length > 0) {
-            response += '\n📅 Upcoming Matches:\n';
-            const nextMatches = upcomingMatches
-                .sort((a, b) => new Date(a.date) - new Date(b.date))
-                .slice(0, 3);
-                
-            nextMatches.forEach(match => {
-                const homeTeam = teamsData[match.homeTeam];
-                const awayTeam = teamsData[match.awayTeam];
-                response += `• ${homeTeam.name} vs ${awayTeam.name}\n`;
-                response += `  ${match.date} at ${match.time}\n`;
-            });
-        }
-        
-        // Final Information
-        if (championsLeagueFinal) {
-            response += '\n🏆 Final:\n';
-            const homeTeam = championsLeagueFinal.homeTeam === 'tbd' ? 'TBD' : teamsData[championsLeagueFinal.homeTeam].name;
-            const awayTeam = championsLeagueFinal.awayTeam === 'tbd' ? 'TBD' : teamsData[championsLeagueFinal.awayTeam].name;
-            
-            if (championsLeagueFinal.status === 'completed') {
-                response += `• ${homeTeam} ${championsLeagueFinal.score.home}-${championsLeagueFinal.score.away} ${awayTeam}`;
-                if (championsLeagueFinal.penalties) {
-                    response += ` (pens ${championsLeagueFinal.penalties.home}-${championsLeagueFinal.penalties.away})`;
-                }
-            } else {
-                response += `• ${homeTeam} vs ${awayTeam}\n`;
-                response += `  ${championsLeagueFinal.date} at ${championsLeagueFinal.time}\n`;
-                response += `  Venue: ${championsLeagueFinal.homeTeam !== 'tbd' && teamsData[championsLeagueFinal.homeTeam] ? teamsData[championsLeagueFinal.homeTeam].stadium : 'TBD'}`;
-            }
-        }
-        
-        return response;
+        return "Sorry, that competition isn't available. Try:\n• 'Show upcoming matches'\n• 'Analyze recent results'\n• 'Show manager rankings'";
     }
 
     // Match results queries
@@ -3471,57 +3040,7 @@ function processUserQuery(query) {
 
     // Cup progression queries
     if (lowerQuery.includes('cup progression') || lowerQuery.includes('show cups')) {
-        let response = '🏆 Cup Competitions Progress:\n\n';
-        
-        // Champions League progression
-        response += '🌟 Champions League:\n';
-        const clFixtures = getChampionsLeagueFixtures();
-        const clCompleted = clFixtures.filter(m => m.status === 'completed').length;
-        const clTotal = clFixtures.length;
-        const clProgress = Math.round((clCompleted / clTotal) * 100);
-        
-        response += `• Progress: ${clProgress}% (${clCompleted}/${clTotal} matches played)\n`;
-        response += `• Current Stage: Group Stage\n`;
-        response += `• Next Stage: Final\n\n`;
-        
-        // YTY Cup progression
-        response += '🏆 YTY Cup:\n';
-        const ytyCompleted = ytyCupFixtures.filter(m => m.status === 'completed').length;
-        const ytyTotal = ytyCupFixtures.length;
-        const ytyProgress = Math.round((ytyCompleted / ytyTotal) * 100);
-        
-        // Find current stage
-        const completedRounds = ytyCupFixtures.filter(m => m.status === 'completed')
-            .map(m => m.round);
-        const currentStage = completedRounds.length > 0 ? 
-            completedRounds[completedRounds.length - 1] : 'Not started';
-        
-        // Find next stage
-        const nextStage = ytyCupFixtures.find(m => m.status === 'scheduled')?.round || 'Final';
-        
-        response += `• Progress: ${ytyProgress}% (${ytyCompleted}/${ytyTotal} matches played)\n`;
-        response += `• Current Stage: ${currentStage}\n`;
-        response += `• Next Stage: ${nextStage}\n\n`;
-        
-        // Upcoming cup matches
-        const upcomingMatches = [
-            ...clFixtures.filter(m => m.status === 'scheduled'),
-            ...ytyCupFixtures.filter(m => m.status === 'scheduled')
-        ].sort((a, b) => new Date(a.date) - new Date(b.date)).slice(0, 3);
-        
-        if (upcomingMatches.length > 0) {
-            response += '📅 Next Cup Matches:\n';
-            upcomingMatches.forEach(match => {
-                const homeTeam = teamsData[match.homeTeam];
-                const awayTeam = teamsData[match.awayTeam];
-                const competition = match.round === 'Final' ? 'YTY Cup Final' : 
-                    match.round ? 'YTY Cup' : 'Champions League';
-                response += `• ${competition}: ${homeTeam.name} vs ${awayTeam.name}\n`;
-                response += `  ${match.date} at ${match.time}\n`;
-            });
-        }
-        
-        return response;
+        return "Sorry, cup competitions aren't available. Try:\n• 'Show upcoming matches'\n• 'Analyze recent results'\n• 'Show manager rankings'";
     }
 
     // Manager rankings query
@@ -3536,7 +3055,7 @@ function processUserQuery(query) {
                 .filter(m => m.status === 'scheduled')
                 .sort((a, b) => new Date(a.date) - new Date(b.date))[0];
             const firstDateTime = firstFixture ? `${firstFixture.date} at ${firstFixture.time}` : 'soon';
-            return `👔 Manager rankings aren\'t available until competitive matches begin.\n\n📅 First fixtures: ${firstDateTime}\n\nTry:\n• 'Show upcoming matches'\n• 'Show the league table'\n• 'Tell me about the Champions League'`;
+            return `👔 Manager rankings aren\'t available until competitive matches begin.\n\n📅 First fixtures: ${firstDateTime}\n\nTry:\n• 'Show upcoming matches'\n• 'Show the league table'`;
         }
         
         // Create manager rankings array
@@ -3602,7 +3121,7 @@ function processUserQuery(query) {
     }
 
     // Default response for unrecognized queries
-    return "I'm not sure I understand. You can ask me about:\n- League standings and detailed statistics\n- Team performance analysis and form\n- Match results and trends\n- Champions League progress and predictions\n- Player statistics and comparisons\n\nTry asking something like:\n• 'Show me the league table'\n• 'How is [team name] performing?'\n• 'Analyze recent results'\n• 'Tell me about the Champions League'";
+    return "I'm not sure I understand. You can ask me about:\n- League standings and detailed statistics\n- Team performance analysis and form\n- Match results and trends\n- Player statistics and comparisons\n\nTry asking something like:\n• 'Show me the league table'\n• 'How is [team name] performing?'\n• 'Analyze recent results'\n• 'Show upcoming matches'\n• 'Show manager rankings'";
 }
 
 function initializeSeasonSelector() {
@@ -3767,6 +3286,84 @@ function initializePageFunctionality() {
     initializeMatchdaySelectors();
     initializeFriendliesFilters();
     // ... existing code ...
+}
+
+// Inject marquee styles for News titles (only once)
+function injectNewsMarqueeStyles() {
+    if (document.getElementById('news-marquee-style')) return;
+    const style = document.createElement('style');
+    style.id = 'news-marquee-style';
+    style.textContent = `
+      /* News title marquee styles */
+      .news-card .news-title {
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .news-card .news-title .news-title-scroll {
+        display: inline-block;
+        will-change: transform;
+        line-height: 1.2;
+      }
+      /* Disable ellipsis when marquee is active so text can scroll fully */
+      .news-card .news-title.is-overflowing {
+        text-overflow: clip;
+      }
+      .news-card .news-title.is-overflowing .news-title-scroll {
+        animation: newsTitleMarquee var(--news-marquee-duration, 12s) linear infinite;
+      }
+      .news-card .news-title:hover .news-title-scroll {
+        animation-play-state: paused;
+      }
+      @keyframes newsTitleMarquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-1 * var(--scroll-distance))); }
+      }
+    `;
+    document.head.appendChild(style);
+}
+
+// Initialize marquee behavior for overflowing News titles
+function initializeNewsMarquee() {
+    const containers = document.querySelectorAll('.news-card .news-title');
+    containers.forEach(container => {
+        const scrollEl = container.querySelector('.news-title-scroll');
+        if (!scrollEl) return;
+
+        // Reset
+        scrollEl.style.setProperty('--scroll-distance', '0px');
+        scrollEl.style.setProperty('--news-marquee-duration', '0s');
+        container.classList.remove('is-overflowing');
+
+        const measure = () => {
+            const containerWidth = container.clientWidth;
+            const contentWidth = scrollEl.scrollWidth;
+
+            if (contentWidth <= containerWidth + 2) {
+                // No overflow
+                scrollEl.style.removeProperty('--scroll-distance');
+                scrollEl.style.removeProperty('--news-marquee-duration');
+                container.classList.remove('is-overflowing');
+                scrollEl.style.transform = 'translateX(0)';
+                return;
+            }
+
+            const gap = Math.max(24, Math.round(containerWidth * 0.08));
+            const distance = contentWidth - containerWidth + gap;
+            const speed = 50; // px per second
+            const duration = Math.max(8, Math.round(distance / speed));
+
+            scrollEl.style.setProperty('--scroll-distance', `${distance}px`);
+            scrollEl.style.setProperty('--news-marquee-duration', `${duration}s`);
+            container.classList.add('is-overflowing');
+        };
+
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(measure, { timeout: 250 });
+        } else {
+            requestAnimationFrame(measure);
+        }
+    });
 }
 
 

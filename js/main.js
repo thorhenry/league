@@ -147,7 +147,7 @@ let currentPage = 'home';
 const matchData = {
     fixtures: [
         // Matchday 1 - October 11, 2025
-        { id: 'f1', matchday: 1, date: '2025-10-11', time: '20:00', homeTeam: 'maria', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f1', matchday: 1, date: '2025-10-11', time: '20:00', homeTeam: 'maria', awayTeam: 'offer', status: 'completed', score: { home: 3, away: 1 } },
         { id: 'f2', matchday: 1, date: '2025-10-11', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f3', matchday: 1, date: '2025-10-11', time: '20:00', homeTeam: 'smiles', awayTeam: 'yotah', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f4', matchday: 1, date: '2025-10-11', time: '20:00', homeTeam: 'volts', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },

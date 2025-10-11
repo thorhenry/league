@@ -400,10 +400,10 @@ section h2 {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     text-align: center;
     letter-spacing: 0.06em;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    position: static; /* not sticky */
+    top: auto;
+    z-index: 0;
+    box-shadow: none;
 }
 
 .league-table td {
@@ -2055,16 +2055,11 @@ section h2 {
     transition: background 0.2s;
 }
 
-/* Sticky combined first column on the full table page */
 .table-section .table-container {
     overflow-x: auto;
-    overflow-y: auto; /* detach vertical scroll into the container */
-    position: relative;
-    isolation: isolate; /* create a new stacking context for reliable z-index layering */
-    overscroll-behavior: contain; /* prevent scroll chaining to the page */
-    max-height: 60vh; /* allow the table to scroll on its own vertically */
-    -webkit-overflow-scrolling: touch; /* smooth mobile scrolling */
+    overflow-y: visible; /* let the page handle vertical scrolling */
 }
+
 .table-section .league-table {
     min-width: 900px;
     table-layout: fixed;

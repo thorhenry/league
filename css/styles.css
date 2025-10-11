@@ -14,6 +14,7 @@
     --card-bg: #ffffff;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
+    --secondary-text: #888;
 }
 
 body {
@@ -176,6 +177,25 @@ section {
     animation: fadeIn 0.5s ease-out;
 }
 
+/* Full-bleed hero: allow the hero to ignore main container constraints */
+main > .home-hero {
+    margin: 0;
+    width: 100vw;
+    max-width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: -2rem; /* offset main's top margin so hero sits flush under header */
+    padding: 0; /* ensure no inner spacing from main */
+}
+/* Ensure hero content sits flush without extra spacing from section defaults */
+.home-hero .hero-content {
+    padding: 0;
+}
+
+/* Restore section heading styles */
 section h2 {
     text-align: center;
     margin-bottom: 2rem;
@@ -1633,7 +1653,7 @@ section h2 {
     }
 
     .teams-search .filter-btn {
-        padding: 0.4rem 1rem;
+        padding: 0.4rem 1.2rem;
         font-size: 0.85rem;
     }
 
@@ -2134,8 +2154,67 @@ section h2 {
     background: rgba(255,165,0,0.22) !important;
 }
 
+
 /* Hide legacy icons */
 .cl-icon, .relegation-icon {
     display: none !important;
+}
+
+/* Home Hero */
+.home-hero {
+    position: relative;
+    width: 100%;
+    min-height: 38vh;
+    border-radius: 0;
+    overflow: hidden;
+    margin: 0;
+    /* box-shadow removed to eliminate extra visual spacing */
+    box-shadow: none;
+}
+.home-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('../images/football-stadium.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.55) saturate(1.1);
+    transform: scale(1.02);
+}
+.home-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.25), rgba(0,0,0,0.45));
+}
+.home-hero .hero-content {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 100%;
+    padding: 2rem;
+    text-align: center;
+}
+.home-hero .hero-title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+.home-hero .hero-subtitle {
+    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+    opacity: 0.9;
+}
+@media (max-width: 768px) {
+    .home-hero {
+        min-height: 32vh;
+        border-radius: 0;
+        margin: 0;
+    }
 }
 

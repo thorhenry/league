@@ -306,26 +306,10 @@ function getPageContent(page) {
             // Show only the 3 most recent news items on the home page, sorted by date descending
             const homeNews = news.slice().sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
             return `
-                <section class="home-section" style="padding:2em 0;">
-                    <div class="home-welcome" style="text-align:center;margin-bottom:2.5em;">
-                        <img src="images/logo.svg" alt="Elite League Logo" style="width:70px;height:70px;margin-bottom:0.7em;">
-                        <h2 style="font-size:2.1em;font-weight:800;letter-spacing:0.01em;color:var(--primary-color);margin-bottom:0.2em;">Welcome to Elite League</h2>
-                        <p style="color:var(--text-color);font-size:1.13em;max-width:500px;margin:0 auto;">Your hub for all things Elite League: fixtures, results, tables, cups, and more. Stay updated and explore the competition!</p>
-                    </div>
-                    <div class="home-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5em;align-items:start;max-width:1800px;margin:0 auto;">
-                        <div class="home-news" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;max-width:500px;margin:0 auto;width:100%;">
-                            <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">Latest News</h3>
-                            <div class="news-list">
-                                ${homeNews.map(n => `
-                                    <div class="news-card" style="margin-bottom:1.1em;">
-                                        <h4 style="margin:0 0 0.2em 0;font-size:1.08em;color:var(--accent-color);font-weight:700;">${n.title}</h4>
-                                        <p style="margin:0 0 0.2em 0;color:var(--text-color);font-size:0.97em;">${n.content}</p>
-                                        <span style="font-size:0.92em;color:var(--secondary-text);">${n.date}</span>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                        <div class="home-fixtures" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;max-width:500px;margin:0 auto;width:100%;">
+                <section class="home-hero"></section>
+                <section class="home-section" style="padding:1.5em 0;">
+                    <div class="home-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5em;align-items:start;max-width:1800px;margin:0 auto;">
+                        <div class="home-fixtures" style="max-width:500px;margin:0 auto;width:100%;">
                             <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">Upcoming Matches</h3>
                             <div class="fixtures-list">
                                 ${upcomingMatches.length === 0 ? `<div style='color:var(--text-color);font-size:1.05em;'>No upcoming matches</div>` :
@@ -351,7 +335,7 @@ function getPageContent(page) {
                                 }
                             </div>
                         </div>
-                        <div class="home-table" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;max-width:350px;margin:0 auto;width:100%;">
+                        <div class="home-table" style="max-width:350px;margin:0 auto;width:100%;">
                             <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">League Table (Top 4 & Bottom 2)</h3>
                             <div style="width:100%;background:none;box-shadow:none;overflow-x:auto;">
                                 <table class="league-table" style="margin-bottom:1em;width:100%;border-radius:14px;overflow:hidden;min-width:200px;">
@@ -422,6 +406,18 @@ function getPageContent(page) {
                                     <i class="fas fa-medal" style="font-size:1.5em;color:var(--accent-color);margin-bottom:0.5em;"></i>
                                     <span style="display:block;font-weight:600;">Hall of Fame</span>
                                 </a>
+                            </div>
+                        </div>
+                        <div class="home-news" style="max-width:500px;margin:0 auto;width:100%;">
+                            <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">Latest News</h3>
+                            <div class="news-list">
+                                ${homeNews.map(n => `
+                                    <div class="news-card" style="margin-bottom:1.1em;">
+                                        <h4 style="margin:0 0 0.2em 0;font-size:1.08em;color:var(--accent-color);font-weight:700;">${n.title}</h4>
+                                        <p style="margin:0 0 0.2em 0;color:var(--text-color);font-size:0.97em;">${n.content}</p>
+                                        <span style="font-size:0.92em;color:var(--secondary-text);">${n.date}</span>
+                                    </div>
+                                `).join('')}
                             </div>
                         </div>
                     </div>
@@ -3305,18 +3301,31 @@ function injectNewsMarqueeStyles() {
         will-change: transform;
         line-height: 1.2;
       }
-      /* Disable ellipsis when marquee is active so text can scroll fully */
-      .news-card .news-title.is-overflowing {
+      /* Ellipsis on non-active overflowing titles; disable ellipsis on active so text can scroll fully */
+      .news-card .news-title.is-overflowing:not(.is-active) {
+        text-overflow: ellipsis;
+      }
+      /* Ensure ellipsis renders on the inner text span when not active */
+      .news-card .news-title.is-overflowing:not(.is-active) .news-title-scroll {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        transform: translateX(0);
+      }
+      .news-card .news-title.is-overflowing.is-active {
         text-overflow: clip;
       }
-      .news-card .news-title.is-overflowing .news-title-scroll {
+      .news-card .news-title.is-overflowing.is-active .news-title-scroll {
         animation: newsTitleMarquee var(--news-marquee-duration, 12s) linear infinite;
       }
-      .news-card .news-title:hover .news-title-scroll {
+      .news-card .news-title:not(.is-active):hover .news-title-scroll {
         animation-play-state: paused;
       }
       @keyframes newsTitleMarquee {
         0% { transform: translateX(0); }
+        10% { transform: translateX(0); }
+        90% { transform: translateX(calc(-1 * var(--scroll-distance))); }
         100% { transform: translateX(calc(-1 * var(--scroll-distance))); }
       }
     `;
@@ -3326,6 +3335,9 @@ function injectNewsMarqueeStyles() {
 // Initialize marquee behavior for overflowing News titles
 function initializeNewsMarquee() {
     const containers = document.querySelectorAll('.news-card .news-title');
+    // Clear previous active state
+    containers.forEach(c => c.classList.remove('is-active'));
+
     containers.forEach(container => {
         const scrollEl = container.querySelector('.news-title-scroll');
         if (!scrollEl) return;
@@ -3349,9 +3361,12 @@ function initializeNewsMarquee() {
             }
 
             const gap = Math.max(24, Math.round(containerWidth * 0.08));
-            const distance = contentWidth - containerWidth + gap;
+            // Scroll full content width plus a small gap so it fully exits left
+            const distance = contentWidth + gap;
             const speed = 50; // px per second
-            const duration = Math.max(8, Math.round(distance / speed));
+            // Account for start/end pauses (10% each) so the visible scrolling keeps the same speed
+            const scrollFraction = 0.8;
+            const duration = Math.max(8, Math.round((distance / speed) / scrollFraction));
 
             scrollEl.style.setProperty('--scroll-distance', `${distance}px`);
             scrollEl.style.setProperty('--news-marquee-duration', `${duration}s`);
@@ -3362,6 +3377,21 @@ function initializeNewsMarquee() {
             requestIdleCallback(measure, { timeout: 250 });
         } else {
             requestAnimationFrame(measure);
+        }
+    });
+
+    // Activate only the selected/first overflowing title
+    const firstOverflowing = Array.from(containers).find(c => c.classList.contains('is-overflowing'));
+    if (firstOverflowing) firstOverflowing.classList.add('is-active');
+
+    // Click to activate specific title (guard to avoid duplicate bindings)
+    containers.forEach(c => {
+        if (c.dataset.clickBound !== 'true') {
+            c.addEventListener('click', () => {
+                containers.forEach(x => x.classList.remove('is-active'));
+                c.classList.add('is-active');
+            });
+            c.dataset.clickBound = 'true';
         }
     });
 }

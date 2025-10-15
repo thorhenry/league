@@ -710,7 +710,12 @@ function getPageContent(page) {
                                                 </div>
                                             </td>
                                             <td>
-                                                ${oppId ? `<img src="${teamsData[oppId].logo}" alt="${teamsData[oppId].name} badge" title="${teamsData[oppId].name}" class="table-next-badge">` : `<span class="no-next">-</span>`}
+                                                ${oppId ? `
+                                                    <div class="table-next-cell">
+                                                        <img src="${teamsData[oppId].logo}" alt="${teamsData[oppId].name} badge" title="${teamsData[oppId].name}" class="table-next-badge">
+                                                        <span class="table-next-name">${teamsData[oppId].name}</span>
+                                                    </div>
+                                                ` : `<span class="no-next">-</span>`}
                                             </td>
                                         </tr>
                                     `;

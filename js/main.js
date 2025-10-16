@@ -146,76 +146,76 @@ let currentPage = 'home';
 // Match data structure
 const matchData = {
     fixtures: [
-        // Matchday 1 - October 13, 2025
-        { id: 'f1', matchday: 1, date: '2025-10-13', time: '20:00', homeTeam: 'maria', awayTeam: 'offer', status: 'completed', score: { home: 2, away: 2 } },
-        { id: 'f2', matchday: 1, date: '2025-10-13', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 2 } },
-        { id: 'f3', matchday: 1, date: '2025-10-13', time: '20:00', homeTeam: 'smiles', awayTeam: 'lardker', status: 'completed', score: { home: 2, away: 3 } },
-        { id: 'f4', matchday: 1, date: '2025-10-13', time: '20:00', homeTeam: 'phenom', awayTeam: 'ghost', status: 'completed', score: { home: 3, away: 2 } },
-        // Matchday 2 - October 14, 2025
-        { id: 'f5', matchday: 2, date: '2025-10-14', time: '20:00', homeTeam: 'kenno', awayTeam: 'maria', status: 'completed', score: { home: 5, away: 0 } },
-        { id: 'f6', matchday: 2, date: '2025-10-14', time: '20:00', homeTeam: 'lardker', awayTeam: 'offer', status: 'completed', score: { home: 2, away: 2 } },
-        { id: 'f7', matchday: 2, date: '2025-10-14', time: '20:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 0 } },
-        { id: 'f8', matchday: 2, date: '2025-10-14', time: '20:00', homeTeam: 'phenom', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 3 - October 15, 2025
-        { id: 'f9', matchday: 3, date: '2025-10-15', time: '20:00', homeTeam: 'ghost', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f10', matchday: 3, date: '2025-10-15', time: '20:00', homeTeam: 'phenom', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f11', matchday: 3, date: '2025-10-15', time: '20:00', homeTeam: 'smiles', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f12', matchday: 3, date: '2025-10-15', time: '20:00', homeTeam: 'thor', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 4 - October 16, 2025
-        { id: 'f13', matchday: 4, date: '2025-10-16', time: '20:00', homeTeam: 'maria', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f14', matchday: 4, date: '2025-10-16', time: '20:00', homeTeam: 'kenno', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f15', matchday: 4, date: '2025-10-16', time: '20:00', homeTeam: 'offer', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f16', matchday: 4, date: '2025-10-16', time: '20:00', homeTeam: 'thor', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 5 - October 17, 2025
-        { id: 'f17', matchday: 5, date: '2025-10-17', time: '20:00', homeTeam: 'maria', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f18', matchday: 5, date: '2025-10-17', time: '20:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f19', matchday: 5, date: '2025-10-17', time: '20:00', homeTeam: 'lardker', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f20', matchday: 5, date: '2025-10-17', time: '20:00', homeTeam: 'kenno', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 6 - October 18, 2025
-        { id: 'f21', matchday: 6, date: '2025-10-18', time: '20:00', homeTeam: 'smiles', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f22', matchday: 6, date: '2025-10-18', time: '20:00', homeTeam: 'thor', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f23', matchday: 6, date: '2025-10-18', time: '20:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f24', matchday: 6, date: '2025-10-18', time: '20:00', homeTeam: 'kenno', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 7 - October 19, 2025
-        { id: 'f25', matchday: 7, date: '2025-10-19', time: '20:00', homeTeam: 'maria', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f26', matchday: 7, date: '2025-10-19', time: '20:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f27', matchday: 7, date: '2025-10-19', time: '20:00', homeTeam: 'phenom', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f28', matchday: 7, date: '2025-10-19', time: '20:00', homeTeam: 'ghost', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 8 - October 20, 2025
-        { id: 'f29', matchday: 8, date: '2025-10-20', time: '20:00', homeTeam: 'lardker', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f30', matchday: 8, date: '2025-10-20', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f31', matchday: 8, date: '2025-10-20', time: '20:00', homeTeam: 'phenom', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f32', matchday: 8, date: '2025-10-20', time: '20:00', homeTeam: 'smiles', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 9 - October 21, 2025
-        { id: 'f33', matchday: 9, date: '2025-10-21', time: '20:00', homeTeam: 'maria', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f34', matchday: 9, date: '2025-10-21', time: '20:00', homeTeam: 'phenom', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f35', matchday: 9, date: '2025-10-21', time: '20:00', homeTeam: 'ghost', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f36', matchday: 9, date: '2025-10-21', time: '20:00', homeTeam: 'lardker', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 10 - October 22, 2025
-        { id: 'f37', matchday: 10, date: '2025-10-22', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f38', matchday: 10, date: '2025-10-22', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f39', matchday: 10, date: '2025-10-22', time: '20:00', homeTeam: 'lardker', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f40', matchday: 10, date: '2025-10-22', time: '20:00', homeTeam: 'ghost', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 11 - October 23, 2025
-        { id: 'f41', matchday: 11, date: '2025-10-23', time: '20:00', homeTeam: 'thor', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f42', matchday: 11, date: '2025-10-23', time: '20:00', homeTeam: 'offer', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f43', matchday: 11, date: '2025-10-23', time: '20:00', homeTeam: 'kenno', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f44', matchday: 11, date: '2025-10-23', time: '20:00', homeTeam: 'lardker', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 12 - October 24, 2025
-        { id: 'f45', matchday: 12, date: '2025-10-24', time: '20:00', homeTeam: 'maria', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f46', matchday: 12, date: '2025-10-24', time: '20:00', homeTeam: 'offer', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f47', matchday: 12, date: '2025-10-24', time: '20:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f48', matchday: 12, date: '2025-10-24', time: '20:00', homeTeam: 'smiles', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 13 - October 25, 2025
-        { id: 'f49', matchday: 13, date: '2025-10-25', time: '20:00', homeTeam: 'phenom', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f50', matchday: 13, date: '2025-10-25', time: '20:00', homeTeam: 'smiles', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f51', matchday: 13, date: '2025-10-25', time: '20:00', homeTeam: 'thor', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f52', matchday: 13, date: '2025-10-25', time: '20:00', homeTeam: 'offer', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
-        // Matchday 14 - October 26, 2025
-        { id: 'f53', matchday: 14, date: '2025-10-26', time: '20:00', homeTeam: 'maria', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f54', matchday: 14, date: '2025-10-26', time: '20:00', homeTeam: 'lardker', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f55', matchday: 14, date: '2025-10-26', time: '20:00', homeTeam: 'kenno', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f56', matchday: 14, date: '2025-10-26', time: '20:00', homeTeam: 'offer', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } }
+        // Matchday 1 - October 12, 2025
+        { id: 'f1', matchday: 1, date: '2025-10-12', time: '20:00', homeTeam: 'maria', awayTeam: 'offer', status: 'completed', score: { home: 2, away: 2 } },
+        { id: 'f2', matchday: 1, date: '2025-10-12', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 2 } },
+        { id: 'f3', matchday: 1, date: '2025-10-12', time: '20:00', homeTeam: 'smiles', awayTeam: 'lardker', status: 'completed', score: { home: 2, away: 3 } },
+        { id: 'f4', matchday: 1, date: '2025-10-12', time: '20:00', homeTeam: 'phenom', awayTeam: 'ghost', status: 'completed', score: { home: 3, away: 2 } },
+        // Matchday 2 - October 13, 2025
+        { id: 'f5', matchday: 2, date: '2025-10-13', time: '20:00', homeTeam: 'kenno', awayTeam: 'maria', status: 'completed', score: { home: 5, away: 0 } },
+        { id: 'f6', matchday: 2, date: '2025-10-13', time: '20:00', homeTeam: 'lardker', awayTeam: 'offer', status: 'completed', score: { home: 2, away: 2 } },
+        { id: 'f7', matchday: 2, date: '2025-10-13', time: '20:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 0 } },
+        { id: 'f8', matchday: 2, date: '2025-10-13', time: '20:00', homeTeam: 'phenom', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 3 - October 14, 2025
+        { id: 'f9', matchday: 3, date: '2025-10-14', time: '20:00', homeTeam: 'ghost', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f10', matchday: 3, date: '2025-10-14', time: '20:00', homeTeam: 'phenom', awayTeam: 'lardker', status: 'completed', score: { home: 0, away: 1 } },
+        { id: 'f11', matchday: 3, date: '2025-10-14', time: '20:00', homeTeam: 'smiles', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f12', matchday: 3, date: '2025-10-14', time: '20:00', homeTeam: 'thor', awayTeam: 'offer', status: 'completed', score: { home: 0, away: 0 } },
+        // Matchday 4 - October 15, 2025
+        { id: 'f13', matchday: 4, date: '2025-10-15', time: '20:00', homeTeam: 'maria', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f14', matchday: 4, date: '2025-10-15', time: '20:00', homeTeam: 'kenno', awayTeam: 'ghost', status: 'completed', score: { home: 3, away: 2 } },
+        { id: 'f15', matchday: 4, date: '2025-10-15', time: '20:00', homeTeam: 'offer', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f16', matchday: 4, date: '2025-10-15', time: '20:00', homeTeam: 'thor', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 5 - October 16, 2025
+        { id: 'f17', matchday: 5, date: '2025-10-16', time: '20:00', homeTeam: 'maria', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f18', matchday: 5, date: '2025-10-16', time: '20:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f19', matchday: 5, date: '2025-10-16', time: '20:00', homeTeam: 'lardker', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f20', matchday: 5, date: '2025-10-16', time: '20:00', homeTeam: 'kenno', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 6 - October 17, 2025
+        { id: 'f21', matchday: 6, date: '2025-10-17', time: '20:00', homeTeam: 'smiles', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f22', matchday: 6, date: '2025-10-17', time: '20:00', homeTeam: 'thor', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f23', matchday: 6, date: '2025-10-17', time: '20:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f24', matchday: 6, date: '2025-10-17', time: '20:00', homeTeam: 'kenno', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 7 - October 18, 2025
+        { id: 'f25', matchday: 7, date: '2025-10-18', time: '20:00', homeTeam: 'maria', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f26', matchday: 7, date: '2025-10-18', time: '20:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f27', matchday: 7, date: '2025-10-18', time: '20:00', homeTeam: 'phenom', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f28', matchday: 7, date: '2025-10-18', time: '20:00', homeTeam: 'ghost', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 8 - October 19, 2025
+        { id: 'f29', matchday: 8, date: '2025-10-19', time: '20:00', homeTeam: 'lardker', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f30', matchday: 8, date: '2025-10-19', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f31', matchday: 8, date: '2025-10-19', time: '20:00', homeTeam: 'phenom', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f32', matchday: 8, date: '2025-10-19', time: '20:00', homeTeam: 'smiles', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 9 - October 20, 2025
+        { id: 'f33', matchday: 9, date: '2025-10-20', time: '20:00', homeTeam: 'maria', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f34', matchday: 9, date: '2025-10-20', time: '20:00', homeTeam: 'phenom', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f35', matchday: 9, date: '2025-10-20', time: '20:00', homeTeam: 'ghost', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f36', matchday: 9, date: '2025-10-20', time: '20:00', homeTeam: 'lardker', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 10 - October 21, 2025
+        { id: 'f37', matchday: 10, date: '2025-10-21', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f38', matchday: 10, date: '2025-10-21', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f39', matchday: 10, date: '2025-10-21', time: '20:00', homeTeam: 'lardker', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f40', matchday: 10, date: '2025-10-21', time: '20:00', homeTeam: 'ghost', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 11 - October 22, 2025
+        { id: 'f41', matchday: 11, date: '2025-10-22', time: '20:00', homeTeam: 'thor', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f42', matchday: 11, date: '2025-10-22', time: '20:00', homeTeam: 'offer', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f43', matchday: 11, date: '2025-10-22', time: '20:00', homeTeam: 'kenno', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f44', matchday: 11, date: '2025-10-22', time: '20:00', homeTeam: 'lardker', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 12 - October 23, 2025
+        { id: 'f45', matchday: 12, date: '2025-10-23', time: '20:00', homeTeam: 'maria', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f46', matchday: 12, date: '2025-10-23', time: '20:00', homeTeam: 'offer', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f47', matchday: 12, date: '2025-10-23', time: '20:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f48', matchday: 12, date: '2025-10-23', time: '20:00', homeTeam: 'smiles', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 13 - October 24, 2025
+        { id: 'f49', matchday: 13, date: '2025-10-24', time: '20:00', homeTeam: 'phenom', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f50', matchday: 13, date: '2025-10-24', time: '20:00', homeTeam: 'smiles', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f51', matchday: 13, date: '2025-10-24', time: '20:00', homeTeam: 'thor', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f52', matchday: 13, date: '2025-10-24', time: '20:00', homeTeam: 'offer', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 14 - October 25, 2025
+        { id: 'f53', matchday: 14, date: '2025-10-25', time: '20:00', homeTeam: 'maria', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f54', matchday: 14, date: '2025-10-25', time: '20:00', homeTeam: 'lardker', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f55', matchday: 14, date: '2025-10-25', time: '20:00', homeTeam: 'kenno', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f56', matchday: 14, date: '2025-10-25', time: '20:00', homeTeam: 'offer', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } }
     ]
 };
 

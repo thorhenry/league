@@ -184,7 +184,7 @@ const matchData = {
         // Matchday 8 - October 19, 2025
         { id: 'f29', matchday: 8, date: '2025-10-19', time: '20:00', homeTeam: 'lardker', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f30', matchday: 8, date: '2025-10-19', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f31', matchday: 8, date: '2025-10-19', time: '20:00', homeTeam: 'phenom', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f31', matchday: 8, date: '2025-10-19', time: '20:00', homeTeam: 'phenom', awayTeam: 'offer', status: 'completed', score: { home: 0, away: 2 } },
         { id: 'f32', matchday: 8, date: '2025-10-19', time: '20:00', homeTeam: 'smiles', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 9 - October 20, 2025
         { id: 'f33', matchday: 9, date: '2025-10-20', time: '20:00', homeTeam: 'maria', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },

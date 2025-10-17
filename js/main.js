@@ -173,7 +173,7 @@ const matchData = {
         { id: 'f20', matchday: 5, date: '2025-10-16', time: '20:00', homeTeam: 'kenno', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 6 - October 17, 2025
         { id: 'f21', matchday: 6, date: '2025-10-17', time: '20:00', homeTeam: 'smiles', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f22', matchday: 6, date: '2025-10-17', time: '20:00', homeTeam: 'thor', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f22', matchday: 6, date: '2025-10-17', time: '20:00', homeTeam: 'thor', awayTeam: 'phenom', status: 'completed', score: { home: 0, away: 1 } },
         { id: 'f23', matchday: 6, date: '2025-10-17', time: '20:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f24', matchday: 6, date: '2025-10-17', time: '20:00', homeTeam: 'kenno', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 7 - October 18, 2025

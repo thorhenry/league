@@ -177,7 +177,7 @@ const matchData = {
         { id: 'f23', matchday: 6, date: '2025-10-17', time: '20:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'completed', score: { home: 2, away: 3 } },
         { id: 'f24', matchday: 6, date: '2025-10-17', time: '20:00', homeTeam: 'kenno', awayTeam: 'lardker', status: 'completed', score: { home: 6, away: 1 } },
         // Matchday 7 - October 18, 2025
-        { id: 'f25', matchday: 7, date: '2025-10-18', time: '20:00', homeTeam: 'maria', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f25', matchday: 7, date: '2025-10-18', time: '20:00', homeTeam: 'maria', awayTeam: 'thor', status: 'completed', score: { home: 3, away: 2 } },
         { id: 'f26', matchday: 7, date: '2025-10-18', time: '20:00', homeTeam: 'newton', awayTeam: 'offer', status: 'completed', score: { home: 5, away: 4 } },
         { id: 'f27', matchday: 7, date: '2025-10-18', time: '20:00', homeTeam: 'phenom', awayTeam: 'kenno', status: 'completed', score: { home: 1, away: 3 } },
         { id: 'f28', matchday: 7, date: '2025-10-18', time: '20:00', homeTeam: 'ghost', awayTeam: 'lardker', status: 'completed', score: { home: 5, away: 0 } },

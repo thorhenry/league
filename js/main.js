@@ -195,7 +195,7 @@ const matchData = {
         { id: 'f37', matchday: 10, date: '2025-10-21', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'completed', score: { home: 5, away: 4 } },
         { id: 'f38', matchday: 10, date: '2025-10-21', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 4, away: 3 } },
         { id: 'f39', matchday: 10, date: '2025-10-21', time: '20:00', homeTeam: 'lardker', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f40', matchday: 10, date: '2025-10-21', time: '20:00', homeTeam: 'ghost', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f40', matchday: 10, date: '2025-10-21', time: '20:00', homeTeam: 'ghost', awayTeam: 'phenom', status: 'completed', score: { home: 1, away: 2 } },
         // Matchday 11 - October 22, 2025
         { id: 'f41', matchday: 11, date: '2025-10-22', time: '20:00', homeTeam: 'thor', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f42', matchday: 11, date: '2025-10-22', time: '20:00', homeTeam: 'offer', awayTeam: 'newton', status: 'completed', score: { home: 1, away: 2 } },

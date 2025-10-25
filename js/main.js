@@ -204,7 +204,7 @@ const matchData = {
         // Matchday 12 - October 23, 2025
         { id: 'f45', matchday: 12, date: '2025-10-23', time: '20:00', homeTeam: 'maria', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 3 } },
         { id: 'f46', matchday: 12, date: '2025-10-23', time: '20:00', homeTeam: 'offer', awayTeam: 'yotah', status: 'completed', score: { home: 2, away: 3 } },
-        { id: 'f47', matchday: 12, date: '2025-10-23', time: '20:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f47', matchday: 12, date: '2025-10-23', time: '20:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'completed', score: { home: 2, away: 4 } },
         { id: 'f48', matchday: 12, date: '2025-10-23', time: '20:00', homeTeam: 'newton', awayTeam: 'phenom', status: 'completed', score: { home: 1, away: 3 } },
         // Matchday 13 - October 24, 2025
         { id: 'f49', matchday: 13, date: '2025-10-24', time: '20:00', homeTeam: 'phenom', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },

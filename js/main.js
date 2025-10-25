@@ -336,9 +336,9 @@ function getPageContent(page) {
                                 }
                             </div>
                         </div>
-                        <div class="home-table" style="max-width:350px;margin:0 auto;width:100%;">
+                        <div class="home-table" style="max-width:500px;margin:0 auto;width:100%;">
                             <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">League Table (Top 4 & Bottom 2)</h3>
-                            <div style="width:100%;background:none;box-shadow:none;overflow-x:auto;">
+                            <div style="width:100%;background:var(--card-bg);box-shadow:var(--shadow);border-radius:14px;padding:1.5em;">
                                 <table class="league-table" style="margin-bottom:1em;width:100%;border-radius:14px;">
                                     <thead>
                                         <tr>

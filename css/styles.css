@@ -418,6 +418,13 @@ section h2 {
 /* Home mini table responsive fixes */
 .home-table .league-table {
     table-layout: fixed;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    min-width: 0; /* override mobile min-width for home mini table */
+}
+.home-table .league-table th {
+    background: transparent;
 }
 
 .home-table .league-table td:nth-child(2) {
@@ -2143,21 +2150,28 @@ section h2 {
 .table-section .league-table thead th:last-child {
     border-right: none;
 }
-/* Combined Pos+Team column (no stickiness so the whole table scrolls) */
+/* Sticky Pos+Team column: keep first column fixed, allow other stats to scroll */
 .table-section .league-table th:first-child,
-.table-section .league-table td:first-child,
-.table-section .league-table th.table-pos-team-header,
-.table-section .league-table td.table-pos-team-cell {
-    position: static;
-    left: auto;
+.table-section .league-table th.table-pos-team-header {
+    position: sticky;
+    left: 0;
+    z-index: 3; /* above body cells */
     background: var(--card-bg);
-    z-index: 0;
     min-width: var(--pos-team-col-width);
     width: var(--pos-team-col-width);
-    box-shadow: none;
-    overflow: hidden; /* clip underlying scrolling content */
     text-align: left;
-    transform: none; /* remove compositing */
+    box-shadow: none;
+}
+.table-section .league-table td:first-child,
+.table-section .league-table td.table-pos-team-cell {
+    position: sticky;
+    left: 0;
+    z-index: 2; /* below header cell, above scrolling columns */
+    background: var(--card-bg);
+    min-width: var(--pos-team-col-width);
+    width: var(--pos-team-col-width);
+    text-align: left;
+    box-shadow: none;
 }
 
 /* Divider alignment: apply on body, remove on header */
@@ -2178,14 +2192,14 @@ section h2 {
 }
 /* Sticky header cell aligns with sticky body cell */
 .table-section .league-table thead th:first-child {
-    position: static;
-    left: auto;
-    z-index: 0;
+    position: sticky;
+    left: 0;
+    z-index: 3;
     background: var(--card-bg);
     min-width: var(--pos-team-col-width);
     width: var(--pos-team-col-width);
     text-align: left;
-    border-right: none;
+    border-right: 1px solid var(--table-divider, rgba(0,0,0,0.12));
 }
 .table-pos-team-cell .table-team-badge {
     display: block;

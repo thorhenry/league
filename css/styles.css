@@ -2124,8 +2124,9 @@ section h2 {
 .table-section .league-table {
     min-width: 900px;
     table-layout: fixed;
-    overflow: visible;
-    position: relative; /* ensure z-index on sticky cells works as expected */
+    overflow: hidden; /* clip content to show rounded corners */
+    position: relative;
+    border-radius: 16px; /* slightly more rounded for a card feel */
     /* use variable for combined sticky column width to keep it flush */
     --pos-team-col-width: 220px; /* 60px (Pos) + 160px (Team) */
 }
@@ -2150,12 +2151,12 @@ section h2 {
 .table-section .league-table thead th:last-child {
     border-right: none;
 }
-/* Sticky Pos+Team column: keep first column fixed, allow other stats to scroll */
+/* Pos+Team column: non-sticky in table page */
 .table-section .league-table th:first-child,
 .table-section .league-table th.table-pos-team-header {
-    position: sticky;
-    left: 0;
-    z-index: 3; /* above body cells */
+    position: static;
+    left: auto;
+    z-index: 0;
     background: var(--card-bg);
     min-width: var(--pos-team-col-width);
     width: var(--pos-team-col-width);
@@ -2164,9 +2165,9 @@ section h2 {
 }
 .table-section .league-table td:first-child,
 .table-section .league-table td.table-pos-team-cell {
-    position: sticky;
-    left: 0;
-    z-index: 2; /* below header cell, above scrolling columns */
+    position: static;
+    left: auto;
+    z-index: 0;
     background: var(--card-bg);
     min-width: var(--pos-team-col-width);
     width: var(--pos-team-col-width);
@@ -2192,9 +2193,9 @@ section h2 {
 }
 /* Sticky header cell aligns with sticky body cell */
 .table-section .league-table thead th:first-child {
-    position: sticky;
-    left: 0;
-    z-index: 3;
+    position: static;
+    left: auto;
+    z-index: 0;
     background: var(--card-bg);
     min-width: var(--pos-team-col-width);
     width: var(--pos-team-col-width);

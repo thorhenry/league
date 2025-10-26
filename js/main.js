@@ -149,7 +149,7 @@ const matchData = {
         // Matchday 1 - October 25, 2025
         { id: 'f1', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'maria', awayTeam: 'offer', status: 'completed', score: { home: 3, away: 2 } },
         { id: 'f2', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'volts', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f3', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'newton', awayTeam: 'yotah', status: 'completed', score: { home: 0, away: 3 } },
+        { id: 'f3', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'newton', awayTeam: 'yotah', status: 'completed', score: { home: 1, away: 9 } },
         { id: 'f4', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'phenom', awayTeam: 'lardker', status: 'completed', score: { home: 3, away: 1 } },
         // Matchday 1 - October 25, 2025
         { id: 'f1', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'completed', score: { home: 3, away: 0 } },

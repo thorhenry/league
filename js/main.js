@@ -148,12 +148,12 @@ const matchData = {
     fixtures: [
         // Matchday 1 - October 25, 2025
         { id: 'f1', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'maria', awayTeam: 'offer', status: 'completed', score: { home: 3, away: 2 } },
-        { id: 'f2', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'mignon', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f2', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'mignon', awayTeam: 'smiles', status: 'completed', score: { home: 1, away: 1 } },
         { id: 'f3', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'newton', awayTeam: 'yotah', status: 'completed', score: { home: 1, away: 9 } },
         { id: 'f4', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'phenom', awayTeam: 'lardker', status: 'completed', score: { home: 3, away: 1 } },
         // Matchday 1 - October 25, 2025
         { id: 'f1', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'completed', score: { home: 3, away: 0 } },
-        { id: 'f2', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'smiles', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f2', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'smiles', awayTeam: 'mignon', status: 'completed', score: { home: 3, away: 2 } },
         { id: 'f3', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'yotah', awayTeam: 'newton', status: 'completed', score: { home: 10, away: 3 } },
         { id: 'f4', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'lardker', awayTeam: 'phenom', status: 'completed', score: { home: 0, away: 3 } },
         // Matchday 2 - October 26, 2025
@@ -167,12 +167,12 @@ const matchData = {
         { id: 'f7', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'mignon', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f8', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'newton', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 3 - October 27, 2025
-        { id: 'f9', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'lardker', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f9', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'lardker', awayTeam: 'maria', status: 'completed', score: { home: 6, away: 5 } },
         { id: 'f10', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'phenom', awayTeam: 'yotah', status: 'completed', score: { home: 3, away: 2 } },
         { id: 'f11', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'newton', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f12', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'mignon', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 3 - October 27, 2025
-        { id: 'f9', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'maria', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f9', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'maria', awayTeam: 'lardker', status: 'completed', score: { home: 2, away: 2 } },
         { id: 'f10', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'yotah', awayTeam: 'phenom', status: 'completed', score: { home: 2, away: 4 } },
         { id: 'f11', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f12', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'offer', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -187,12 +187,12 @@ const matchData = {
         { id: 'f15', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'phenom', awayTeam: 'offer', status: 'completed', score: { home: 3, away: 0 } },
         { id: 'f16', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'newton', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 5 - October 29, 2025
-        { id: 'f17', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'maria', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f17', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'maria', awayTeam: 'phenom', status: 'completed', score: { home: 0, away: 6 } },
         { id: 'f18', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'lardker', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f19', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'yotah', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f20', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 5 - October 29, 2025
-        { id: 'f17', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'phenom', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f17', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'phenom', awayTeam: 'maria', status: 'completed', score: { home: 4, away: 3 } },
         { id: 'f18', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'newton', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f19', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'mignon', awayTeam: 'yotah', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f20', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'offer', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -209,12 +209,12 @@ const matchData = {
         // Matchday 7 - October 31, 2025
         { id: 'f25', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'maria', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f26', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'newton', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f27', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'phenom', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f27', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'phenom', awayTeam: 'smiles', status: 'completed', score: { home: 4, away: 4 } },
         { id: 'f28', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'lardker', awayTeam: 'yotah', status: 'completed', score: { home: 3, away: 2 } },
         // Matchday 7 - October 31, 2025
         { id: 'f25', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'mignon', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f26', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'offer', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f27', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'smiles', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f27', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'smiles', awayTeam: 'phenom', status: 'completed', score: { home: 0, away: 2 } },
         { id: 'f28', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'yotah', awayTeam: 'lardker', status: 'completed', score: { home: 2, away: 2 } }
         
     ]

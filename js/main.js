@@ -157,12 +157,12 @@ const matchData = {
         { id: 'f3', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'yotah', awayTeam: 'newton', status: 'completed', score: { home: 10, away: 3 } },
         { id: 'f4', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'lardker', awayTeam: 'phenom', status: 'completed', score: { home: 0, away: 3 } },
         // Matchday 2 - October 26, 2025
-        { id: 'f5', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'smiles', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f5', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'smiles', awayTeam: 'maria', status: 'completed', score: { home: 1, away: 3 } },
         { id: 'f6', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'yotah', awayTeam: 'offer', status: 'completed', score: { home: 6, away: 4 } },
         { id: 'f7', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'lardker', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f8', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'phenom', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 2 - October 26, 2025
-        { id: 'f5', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'maria', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f5', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'maria', awayTeam: 'smiles', status: 'completed', score: { home: 1, away: 4 } },
         { id: 'f6', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'offer', awayTeam: 'yotah', status: 'completed', score: { home: 2, away: 2 } },
         { id: 'f7', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'mignon', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f8', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'newton', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },

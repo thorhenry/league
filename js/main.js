@@ -11,10 +11,10 @@ const teamsData = {
         shortName: 'AFC',
         logo: 'images/club-logos/aka.svg'
     },
-    'volts': {
-        name: 'Volts',
-        stadium: 'Volts Arena',
-        manager: 'Volts',
+    'mignon': {
+        name: 'Mignon',
+        stadium: 'Mignon Arena',
+        manager: 'Mignon',
         capacity: 40000,
         founded: 2022,
         titles: 0,
@@ -148,71 +148,71 @@ const matchData = {
     fixtures: [
         // Matchday 1 - October 25, 2025
         { id: 'f1', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'maria', awayTeam: 'offer', status: 'completed', score: { home: 3, away: 2 } },
-        { id: 'f2', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'volts', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f2', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'mignon', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f3', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'newton', awayTeam: 'yotah', status: 'completed', score: { home: 1, away: 9 } },
         { id: 'f4', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'phenom', awayTeam: 'lardker', status: 'completed', score: { home: 3, away: 1 } },
         // Matchday 1 - October 25, 2025
         { id: 'f1', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'completed', score: { home: 3, away: 0 } },
-        { id: 'f2', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'smiles', awayTeam: 'volts', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f2', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'smiles', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f3', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'yotah', awayTeam: 'newton', status: 'completed', score: { home: 10, away: 3 } },
         { id: 'f4', matchday: 1, date: '2025-10-25', time: '20:00', homeTeam: 'lardker', awayTeam: 'phenom', status: 'completed', score: { home: 0, away: 3 } },
         // Matchday 2 - October 26, 2025
         { id: 'f5', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'smiles', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f6', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'yotah', awayTeam: 'offer', status: 'completed', score: { home: 6, away: 4 } },
-        { id: 'f7', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'lardker', awayTeam: 'volts', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f7', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'lardker', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f8', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'phenom', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 2 - October 26, 2025
         { id: 'f5', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'maria', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f6', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'offer', awayTeam: 'yotah', status: 'completed', score: { home: 2, away: 2 } },
-        { id: 'f7', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'volts', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f7', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'mignon', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f8', matchday: 2, date: '2025-10-26', time: '20:00', homeTeam: 'newton', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 3 - October 27, 2025
         { id: 'f9', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'lardker', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f10', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'phenom', awayTeam: 'yotah', status: 'completed', score: { home: 3, away: 2 } },
         { id: 'f11', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'newton', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f12', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'volts', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f12', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'mignon', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 3 - October 27, 2025
         { id: 'f9', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'maria', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f10', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'yotah', awayTeam: 'phenom', status: 'completed', score: { home: 2, away: 4 } },
         { id: 'f11', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f12', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'offer', awayTeam: 'volts', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f12', matchday: 3, date: '2025-10-27', time: '20:00', homeTeam: 'offer', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 4 - October 28, 2025
-        { id: 'f13', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'maria', awayTeam: 'yotah', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f13', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'maria', awayTeam: 'yotah', status: 'completed', score: { home: 2, away: 3 } },
         { id: 'f14', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'smiles', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f15', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'offer', awayTeam: 'phenom', status: 'completed', score: { home: 1, away: 7 } },
-        { id: 'f16', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'volts', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f16', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'mignon', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 4 - October 28, 2025
-        { id: 'f13', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'yotah', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f14', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'smiles', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f13', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'yotah', awayTeam: 'maria', status: 'completed', score: { home: 3, away: 7 } },
+        { id: 'f14', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'lardker', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f15', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'phenom', awayTeam: 'offer', status: 'completed', score: { home: 3, away: 0 } },
-        { id: 'f16', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'newton', awayTeam: 'volts', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f16', matchday: 4, date: '2025-10-28', time: '20:00', homeTeam: 'newton', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 5 - October 29, 2025
         { id: 'f17', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'maria', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f18', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'lardker', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f19', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'yotah', awayTeam: 'volts', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f19', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'yotah', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f20', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 5 - October 29, 2025
         { id: 'f17', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'phenom', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f18', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'newton', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f19', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'volts', awayTeam: 'yotah', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f19', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'mignon', awayTeam: 'yotah', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f20', matchday: 5, date: '2025-10-29', time: '20:00', homeTeam: 'offer', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 6 - October 30, 2025
         { id: 'f21', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'newton', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f22', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'volts', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f23', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'offer', awayTeam: 'lardker', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f22', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'mignon', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f23', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'offer', awayTeam: 'lardker', status: 'completed', score: { home: 0, away: 5 } },
         { id: 'f24', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'smiles', awayTeam: 'yotah', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 6 - October 30, 2025
         { id: 'f21', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'maria', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f22', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'phenom', awayTeam: 'volts', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f23', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'lardker', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f22', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'phenom', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f23', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'lardker', awayTeam: 'offer', status: 'completed', score: { home: 6, away: 0 } },
         { id: 'f24', matchday: 6, date: '2025-10-30', time: '20:00', homeTeam: 'yotah', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 7 - October 31, 2025
-        { id: 'f25', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'maria', awayTeam: 'volts', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f25', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'maria', awayTeam: 'mignon', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f26', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'newton', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f27', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'phenom', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f28', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'lardker', awayTeam: 'yotah', status: 'completed', score: { home: 3, away: 2 } },
         // Matchday 7 - October 31, 2025
-        { id: 'f25', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'volts', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f25', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'mignon', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f26', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'offer', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f27', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'smiles', awayTeam: 'phenom', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f28', matchday: 7, date: '2025-10-31', time: '20:00', homeTeam: 'yotah', awayTeam: 'lardker', status: 'completed', score: { home: 2, away: 2 } }
@@ -267,8 +267,8 @@ const news = [
         date: '2025-10-10'
     },
     {
-        title: 'volts FC Signs Star Striker',
-        content: 'volts FC has completed the signing of a top striker to boost their attacking options this season.',
+        title: 'mignon FC Signs Star Striker',
+        content: 'mignon FC has completed the signing of a top striker to boost their attacking options this season.',
         date: '2025-10-09'
     },
     {
@@ -1163,7 +1163,7 @@ function getPageContent(page) {
                                         <i class="fas fa-trophy" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">League Champions</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="volts" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="mignon" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
@@ -1181,7 +1181,7 @@ function getPageContent(page) {
                                         <i class="fas fa-medal" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">Overall Best Team</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="volts" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="mignon" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
@@ -2410,7 +2410,7 @@ function initializeMatchdaySelectors() {
 // --- Friendly Fixtures ---
 const friendlyFixtures = [
     // Pre-season Friendlies
-    { id: 'ff1', round: 'Pre-season', date: '2025-05-01', time: '19:00', homeTeam: 'maria', awayTeam: 'volts', status: 'completed', score: { home: 3, away: 2 } },
+    { id: 'ff1', round: 'Pre-season', date: '2025-05-01', time: '19:00', homeTeam: 'maria', awayTeam: 'mignon', status: 'completed', score: { home: 3, away: 2 } },
     { id: 'ff2', round: 'Pre-season', date: '2025-05-02', time: '19:00', homeTeam: 'lardker', awayTeam: 'maria', status: 'completed', score: { home: 1, away: 2 } },
     { id: 'ff3', round: 'Pre-season', date: '2025-05-03', time: '19:00', homeTeam: 'smiles', awayTeam: 'phenom', status: 'completed', score: { home: 5, away: 6 } },
     { id: 'ff4', round: 'Pre-season', date: '2025-05-04', time: '19:00', homeTeam: 'lardker', awayTeam: 'newton', status: 'completed', score: { home: 2, away: 2 } },
@@ -2419,7 +2419,7 @@ const friendlyFixtures = [
     { id: 'ff5', round: 'Mid-season', date: '2025-05-20', time: '19:00', homeTeam: 'phenom', awayTeam: 'maria', status: 'completed', score: { home: 2, away: 2 } },
     { id: 'ff6', round: 'Mid-season', date: '2025-05-21', time: '19:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'completed', score: { home: 1, away: 2 } },
     { id: 'ff7', round: 'Mid-season', date: '2025-05-22', time: '19:00', homeTeam: 'offer', awayTeam: 'lardker', status: 'completed', score: { home: 1, away: 2 } },
-    { id: 'ff8', round: 'Mid-season', date: '2025-05-23', time: '19:00', homeTeam: 'maria', awayTeam: 'volts', status: 'completed', score: { home: 1, away: 5 } }
+    { id: 'ff8', round: 'Mid-season', date: '2025-05-23', time: '19:00', homeTeam: 'maria', awayTeam: 'mignon', status: 'completed', score: { home: 1, away: 5 } }
 ];
 
 
